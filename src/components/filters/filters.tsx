@@ -1,5 +1,6 @@
-import { component$, useStore } from '@builder.io/qwik'
+import { component$, useContext, useStore } from '@builder.io/qwik'
 import { Chip } from '~/components/chip/chip'
+import { AppContext } from '~/root'
 
 type State = {
   showFilters: boolean
@@ -10,6 +11,8 @@ export default component$(() => {
     // showFilters: false,
     showFilters: true,
   })
+
+  const userState = useContext(AppContext)
 
   return (
     <div class="w-full flex">
@@ -29,8 +32,13 @@ export default component$(() => {
             class="border py-1 rounded-lg px-2 w-full"
           />
           <div>
-            <Chip color={'sky'}>Belle famille</Chip>
-            <Chip color={'sky'}>Family</Chip>
+            {userState.groups.map(group => (
+              <span class="inline-block mr-1.5 mb-1.5">
+                <Chip color={'sky'} count={group.count}>
+                  {group.label}
+                </Chip>
+              </span>
+            ))}
           </div>
           {/*<div>Sort by upcoming birthday</div>*/}
           <div class="text-center">

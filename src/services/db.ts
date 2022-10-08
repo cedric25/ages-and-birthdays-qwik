@@ -12,12 +12,15 @@ export async function getUserData(userId: string) {
 
   // FOR TESTS
   return {
-    importantPersons: formatFromDb(dbTestContent.importantPersons),
-    groups: dbTestContent.groups,
+    importantPersons: formatPersonsFromDb(dbTestContent.importantPersons),
+    groups: formatGroupsFromDb(
+      dbTestContent.groups,
+      dbTestContent.importantPersons
+    ),
   }
 }
 
-function formatFromDb(persons: Record<string, Person>) {
+function formatPersonsFromDb(persons: Record<string, Person>) {
   return Object.values(persons).reduce((result, person) => {
     result[person.id] = {
       ...person,
@@ -26,6 +29,15 @@ function formatFromDb(persons: Record<string, Person>) {
     }
     return result
   }, {} as Record<string, Person>)
+}
+
+function formatGroupsFromDb(groups: string[], persons: Record<string, Person>) {
+  return groups.map(groupLabel => ({
+    label: groupLabel,
+    count: Object.values(persons).filter(
+      person => person.groups && person.groups.includes(groupLabel)
+    ).length,
+  }))
 }
 
 function getBirthdayFromIsoDate(birthday: string) {
@@ -92,22 +104,22 @@ export function getGroupsRef(userId: string) {
 }
 
 // To add / update / remove a Firebase important person
-export function setNewImportantPerson(
-  userId: string,
-  personId: string,
-  personToAddOrUpdate: Person | null
-) {
-  const db = getDatabase()
-  if (!personToAddOrUpdate) {
-    return set(ref(db, `users/${userId}/importantPersons/${personId}`), null)
-  }
-  const newPersonForDb = {
-    ...personToAddOrUpdate,
-    birthday: personToAddOrUpdate.birthday.toISOString(),
-    groups: personToAddOrUpdate.groups || null, // Firebase doesn't like undefined?...
-  }
-  return set(
-    ref(db, `users/${userId}/importantPersons/${personId}`),
-    newPersonForDb
-  )
-}
+// export function setNewImportantPerson(
+//   userId: string,
+//   personId: string,
+//   personToAddOrUpdate: Person | null
+// ) {
+//   const db = getDatabase()
+//   if (!personToAddOrUpdate) {
+//     return set(ref(db, `users/${userId}/importantPersons/${personId}`), null)
+//   }
+//   const newPersonForDb = {
+//     ...personToAddOrUpdate,
+//     birthday: personToAddOrUpdate.birthday.toISOString(),
+//     groups: personToAddOrUpdate.groups || null, // Firebase doesn't like undefined?...
+//   }
+//   return set(
+//     ref(db, `users/${userId}/importantPersons/${personId}`),
+//     newPersonForDb
+//   )
+// }

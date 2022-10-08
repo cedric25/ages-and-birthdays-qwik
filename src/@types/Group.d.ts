@@ -1,1 +1,4 @@
-export type Group = string
+export type Group = {
+  label: string
+  count: number
+}
