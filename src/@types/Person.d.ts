@@ -1,5 +1,6 @@
 import type { Group } from '@/@types/Group'
 import type { Parent } from '@/@types/Parent'
+import type { Age } from '~/@types/Age'
 
 export type DbPerson = {
   id: string
@@ -15,7 +16,9 @@ export type DbPerson = {
 }
 
 export type Person = DbPerson & {
+  age: Age | null
   daysUntilBirthday: number
+  isBaby: boolean
 }
 
 export type PersonUpdateInput = {

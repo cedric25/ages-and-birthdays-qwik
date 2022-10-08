@@ -4,6 +4,8 @@ import type { DbPerson, Person } from '~/@types/Person'
 import type { Group } from '~/@types/Group'
 import { YEAR_FOR_NO_YEAR } from '~/constants/constants'
 import { getDaysUntilBirthday } from '~/helpers/daysUntilBirthday'
+import { computeAge } from '~/helpers/computeAge'
+import { isBaby } from '~/helpers/isBaby'
 
 // FOR TESTS
 import dbTestContent from './dbTestContent.json'
@@ -24,11 +26,14 @@ export async function getUserData(userId: string) {
 
 function formatPersonsFromDb(persons: Record<string, DbPerson>) {
   return Object.values(persons).reduce((result, person) => {
+    const age = computeAge(person.birthday)
     result[person.id] = {
       ...person,
       // Until everything is string in db
       birthday: getBirthdayFromIsoDate(person.birthday),
+      age,
       daysUntilBirthday: getDaysUntilBirthday(person.birthday),
+      isBaby: isBaby(age),
     }
     return result
   }, {} as Record<string, Person>)

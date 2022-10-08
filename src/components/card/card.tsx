@@ -20,7 +20,9 @@ export const Card = component$(({ person }: { person: Person }) => {
         ))}
       </div>
       <div class="flex flex-col gap-y-1">
-        <div class="text-center">{person.name}</div>
+        <div class="text-center text-lg">
+          {person.name} {person.isBaby && <span>👶</span>}
+        </div>
         <div class="flex gap-x-2">
           <span class="flex-1 text-right">
             <Chip color="emerald">{readableBirthday}</Chip>
