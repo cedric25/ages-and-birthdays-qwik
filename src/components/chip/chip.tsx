@@ -4,10 +4,12 @@ export const Chip = component$(
   ({
     color,
     count,
+    selected,
     onClick$,
   }: {
     color: 'emerald' | 'indigo' | 'sky'
     count?: number
+    selected?: boolean
     onClick$?: PropFunction<() => void>
   }) => {
     const cssClasses = {
@@ -18,7 +20,9 @@ export const Chip = component$(
     return (
       <button
         type="button"
-        class={`inline-flex items-center h-[28px] text-sm rounded-full ${cssClasses[color]}`}
+        class={`inline-flex items-center h-[28px] text-sm rounded-full ${
+          cssClasses[color]
+        } ${selected ? 'shadow-inner shadow-primary' : ''}`}
         {...(onClick$ && { onClick$ })}
       >
         {count && (

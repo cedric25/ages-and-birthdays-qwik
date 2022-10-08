@@ -39,7 +39,7 @@ export default component$(() => {
       })
       state.persons = sortPersons(filteredPersons)
     } else {
-      state.persons = importantPersons
+      state.persons = sortPersons(importantPersons)
     }
   })
 

@@ -1,4 +1,4 @@
-import { component$, useContext, useStore } from '@builder.io/qwik'
+import { component$, mutable, useContext, useStore } from '@builder.io/qwik'
 import { Chip } from '~/components/chip/chip'
 import { AppContext, UserState } from '~/root'
 
@@ -14,6 +14,10 @@ export function toggleGroup(groupLabel: string, userState: UserState) {
   } else {
     userState.selectedGroups = [...userState.selectedGroups, groupLabel]
   }
+}
+
+export function isGroupSelected(groupLabel: string, userState: UserState) {
+  return userState.selectedGroups.indexOf(groupLabel) !== -1
 }
 
 export default component$(() => {
@@ -47,6 +51,7 @@ export default component$(() => {
                 <Chip
                   color={'sky'}
                   count={group.count}
+                  selected={mutable(isGroupSelected(group.label, userState))}
                   onClick$={() => {
                     toggleGroup(group.label, userState)
                     // userState.selectedGroups = ['Toto']
