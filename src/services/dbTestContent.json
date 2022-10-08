@@ -1,0 +1,514 @@
+{
+  "groups": [
+    "🇦🇺 OCTO & AU",
+    "🇨🇦 Canada & co",
+    "🏓 Ping & co",
+    "💜 Ma chérie",
+    "Belle famille",
+    "IUT & co",
+    "Meetup",
+    "SQLI & more",
+    "👨‍👩‍👧‍👦 Family"
+  ],
+  "importantPersons": {
+    "0pCBs_iJuxpO63OXRxqk0": {
+      "birthday": "1957-06-14T00:00:00.000Z",
+      "groups": ["Belle famille"],
+      "id": "0pCBs_iJuxpO63OXRxqk0",
+      "name": "Maman Solène"
+    },
+    "100763bf-061f-4283-906a-295e89a48650": {
+      "birthday": "2021-10-14T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "100763bf-061f-4283-906a-295e89a48650",
+      "name": "Léon",
+      "parentOne": "Dimitri",
+      "parentTwo": "Cécilia"
+    },
+    "18141fb4-59e9-42ff-a922-6b632040b263": {
+      "birthday": "2020-07-24T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "18141fb4-59e9-42ff-a922-6b632040b263",
+      "name": "Romane",
+      "parentOne": "Lali Lalou",
+      "parentTwo": "Alexis (ostéo)"
+    },
+    "27c9e1bb-1bbc-4a90-8539-88ea834f3133": {
+      "birthday": "1998-03-18T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "27c9e1bb-1bbc-4a90-8539-88ea834f3133",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Rédouane Bensedira"
+    },
+    "2b45322b-b02d-4641-8de8-6183bea2db5b": {
+      "birthday": "1981-04-03T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "2b45322b-b02d-4641-8de8-6183bea2db5b",
+      "name": "Marco"
+    },
+    "3009f260-4888-408f-af97-16c714fc8fd3": {
+      "birthday": "2022-01-26T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "3009f260-4888-408f-af97-16c714fc8fd3",
+      "name": "Damien"
+    },
+    "34e0fe42-ef4c-4736-b602-1ec0150e4d8a": {
+      "birthday": "1992-10-01T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "34e0fe42-ef4c-4736-b602-1ec0150e4d8a",
+      "name": "Kim"
+    },
+    "353675e8-abb3-4004-83cc-07fbd547a8ed": {
+      "birthday": "1986-02-21T00:00:00.000Z",
+      "groups": ["Meetup"],
+      "id": "353675e8-abb3-4004-83cc-07fbd547a8ed",
+      "name": "Sophie"
+    },
+    "38be7e5f-7eff-47bb-8a43-700c33cfaa33": {
+      "birthday": "1988-07-19T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "38be7e5f-7eff-47bb-8a43-700c33cfaa33",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Lali Lalou"
+    },
+    "3LawnKbJyby7faII2vgSw": {
+      "birthday": "2015-10-06T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "3LawnKbJyby7faII2vgSw",
+      "name": "Gab'",
+      "parentOne": "Jacky",
+      "parentTwo": "Anaïs"
+    },
+    "3cebe270-e6c5-456f-9b98-45f218fb6a50": {
+      "birthday": "1929-05-10T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "3cebe270-e6c5-456f-9b98-45f218fb6a50",
+      "name": "Mamie Thérèse"
+    },
+    "3y0bEoKUZQQz4qHsOx4FW": {
+      "birthday": "2015-04-13T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "3y0bEoKUZQQz4qHsOx4FW",
+      "name": "Alyssa",
+      "parentOne": "Damien",
+      "parentTwo": "Cécile"
+    },
+    "41e7dd04-c262-44b4-abbf-e6276f83989d": {
+      "birthday": "1986-04-03T00:00:00.000Z",
+      "groups": ["Belle famille"],
+      "id": "41e7dd04-c262-44b4-abbf-e6276f83989d",
+      "name": "Caroline"
+    },
+    "4543ae43-2d59-47ff-a4f9-45bae0539884": {
+      "birthday": "2020-11-24T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "4543ae43-2d59-47ff-a4f9-45bae0539884",
+      "name": "Alix",
+      "parentOne": "Matthieu",
+      "parentTwo": "Élise"
+    },
+    "45fe7414-2b2c-442d-8b25-0ab3eaef0dc2": {
+      "birthday": "1991-05-30T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "45fe7414-2b2c-442d-8b25-0ab3eaef0dc2",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Sylvain Chenevier"
+    },
+    "52204a1e-cc61-4bad-9e14-96c60070219f": {
+      "birthday": "1992-08-13T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "52204a1e-cc61-4bad-9e14-96c60070219f",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Corentin Baps"
+    },
+    "584bfbdd-861a-4321-9cd6-bab8b6bdadea": {
+      "birthday": "1979-11-12T00:00:00.000Z",
+      "groups": ["SQLI & more"],
+      "id": "584bfbdd-861a-4321-9cd6-bab8b6bdadea",
+      "name": "Corentin Lefebvre"
+    },
+    "58d4cc9f-3c36-4d73-8646-7f0b6f688fac": {
+      "birthday": "1990-02-12T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "58d4cc9f-3c36-4d73-8646-7f0b6f688fac",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Bastien Cocco"
+    },
+    "5b7338a4-3642-4373-b595-4e1c641e0227": {
+      "birthday": "2021-03-17T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "5b7338a4-3642-4373-b595-4e1c641e0227",
+      "name": "Thomas",
+      "parentOne": "Benjamin",
+      "parentTwo": "Laura"
+    },
+    "5f958069-a8a7-4541-9dfb-c5ee0cbfcc3c": {
+      "birthday": "1901-09-11T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "5f958069-a8a7-4541-9dfb-c5ee0cbfcc3c",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Geordie Haricot"
+    },
+    "651907ca-cda0-47e1-bf36-1f40c3031c1e": {
+      "birthday": "2022-12-30T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "651907ca-cda0-47e1-bf36-1f40c3031c1e",
+      "name": "Nico"
+    },
+    "6797fdff-c20f-45ca-b486-c33a18a3bd52": {
+      "birthday": "1931-05-12T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "6797fdff-c20f-45ca-b486-c33a18a3bd52",
+      "name": "Mamie Marie"
+    },
+    "6RwvHw-yf4EA20M2XxxXH": {
+      "birthday": "2019-05-07T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "6RwvHw-yf4EA20M2XxxXH",
+      "name": "Justin",
+      "parentOne": "Kathleen",
+      "parentTwo": "Kévin"
+    },
+    "6a26eabd-2cce-41fe-8c86-785fa78e7996": {
+      "birthday": "1981-05-11T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "6a26eabd-2cce-41fe-8c86-785fa78e7996",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Aurélie Thébault"
+    },
+    "6e7f318c-8aa2-4a4e-abc9-537d28394497": {
+      "birthday": "1987-10-27T00:00:00.000Z",
+      "groups": ["Belle famille"],
+      "id": "6e7f318c-8aa2-4a4e-abc9-537d28394497",
+      "name": "Rémi"
+    },
+    "70a8f727-2db4-4e46-8aa4-1a3ed226ea89": {
+      "birthday": "1960-02-03T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "70a8f727-2db4-4e46-8aa4-1a3ed226ea89",
+      "name": "Henri"
+    },
+    "71aab688-dc4f-413c-8214-b4a10262827a": {
+      "birthday": "1991-04-11T00:00:00.000Z",
+      "groups": ["💜 Ma chérie"],
+      "id": "71aab688-dc4f-413c-8214-b4a10262827a",
+      "name": "Solène"
+    },
+    "75KoSHHW1EIn2huxCx_G0": {
+      "birthday": "1989-09-02T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "75KoSHHW1EIn2huxCx_G0",
+      "name": "Dimitri"
+    },
+    "7ab6de96-be98-447b-9d9f-8637c36d68fa": {
+      "birthday": "1964-11-03T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "7ab6de96-be98-447b-9d9f-8637c36d68fa",
+      "name": "Laurence"
+    },
+    "8128df15-ed92-4069-91e9-b26fb83ce39f": {
+      "birthday": "1987-05-29T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "8128df15-ed92-4069-91e9-b26fb83ce39f",
+      "name": "Julia"
+    },
+    "83cf7b4c-e076-4ac2-99a2-61dbc06f8de7": {
+      "birthday": "1990-01-27T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "83cf7b4c-e076-4ac2-99a2-61dbc06f8de7",
+      "name": "Christelle"
+    },
+    "86aea498-1c50-4d14-8a24-a722e2af75eb": {
+      "birthday": "1988-01-29T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "86aea498-1c50-4d14-8a24-a722e2af75eb",
+      "name": "Cécilia"
+    },
+    "9bf72f2b-b5f2-4cdb-95f5-ff5aced2d9b2": {
+      "birthday": "1987-04-26T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "9bf72f2b-b5f2-4cdb-95f5-ff5aced2d9b2",
+      "name": "Jacky"
+    },
+    "9ddebac9-3fc1-47b4-b66c-441bfbbf32cf": {
+      "birthday": "1988-03-29T00:00:00.000Z",
+      "id": "9ddebac9-3fc1-47b4-b66c-441bfbbf32cf",
+      "name": "Valentine"
+    },
+    "DOukEi1divD98GfGbsT_a": {
+      "birthday": "1983-02-28T00:00:00.000Z",
+      "id": "DOukEi1divD98GfGbsT_a",
+      "name": "Florian Perrot 🥋"
+    },
+    "DV0jv_XYJ9MCa4GQtZw-t": {
+      "birthday": "2019-01-13T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "DV0jv_XYJ9MCa4GQtZw-t",
+      "name": "Liam",
+      "parentOne": "Nico",
+      "parentTwo": "Laureen"
+    },
+    "FhhlmfxDJxG124sFiAqgJ": {
+      "birthday": "2018-08-19T00:00:00.000Z",
+      "groups": ["SQLI & more"],
+      "id": "FhhlmfxDJxG124sFiAqgJ",
+      "name": "Inès",
+      "parentOne": "Coco",
+      "parentTwo": "Stéphanie"
+    },
+    "HDIL5TsfOYQEUTUb1K9fQ": {
+      "birthday": "1989-03-03T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "HDIL5TsfOYQEUTUb1K9fQ",
+      "name": "Flore-Anne"
+    },
+    "LY8SC6qmB1ynX9XZe0nrg": {
+      "birthday": "2021-11-26T00:00:00.000Z",
+      "id": "LY8SC6qmB1ynX9XZe0nrg",
+      "name": "Theo",
+      "parentOne": "Valentine",
+      "parentTwo": "Ben"
+    },
+    "S6jjTivBnoJKopXNXBByn": {
+      "birthday": "1981-08-16T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "S6jjTivBnoJKopXNXBByn",
+      "name": "Jo"
+    },
+    "Tpc4d5K83PiK_D4rH1wRB": {
+      "birthday": "2021-07-20T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "Tpc4d5K83PiK_D4rH1wRB",
+      "name": "Emma",
+      "parentOne": "Jo",
+      "parentTwo": "Élodie"
+    },
+    "XU81Wh4srrw8dCB_LB5Mg": {
+      "birthday": "1896-05-15T00:00:00.000Z",
+      "groups": ["SQLI & more"],
+      "id": "XU81Wh4srrw8dCB_LB5Mg",
+      "name": "Lionel Daudignon"
+    },
+    "XagcZZ-lGZAZTsCLQI2_x": {
+      "birthday": "1978-03-09T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "XagcZZ-lGZAZTsCLQI2_x",
+      "name": "Francys"
+    },
+    "Xjk-4Kjfd8hkAGVJNy0oW": {
+      "birthday": "2022-05-23T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "Xjk-4Kjfd8hkAGVJNy0oW",
+      "name": "Benjamin"
+    },
+    "Z32Wjsh-vRqgONNli-tGL": {
+      "birthday": "2018-05-07T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "Z32Wjsh-vRqgONNli-tGL",
+      "name": "Timéo",
+      "parentOne": "Jo",
+      "parentTwo": "Élodie"
+    },
+    "ZzlilNFGs2s-obcWI1pFG": {
+      "birthday": "2021-11-26T00:00:00.000Z",
+      "id": "ZzlilNFGs2s-obcWI1pFG",
+      "name": "Theodore"
+    },
+    "a287b3b8-3404-44b6-b77c-2991f1bd5a0a": {
+      "birthday": "2006-08-22T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "a287b3b8-3404-44b6-b77c-2991f1bd5a0a",
+      "meta": {
+        "from": "google"
+      },
+      "name": "Hana"
+    },
+    "a42b277f-8289-498a-8b61-ba468d7cc3e5": {
+      "birthday": "2020-12-26T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "a42b277f-8289-498a-8b61-ba468d7cc3e5",
+      "name": "Malone",
+      "parentOne": "Bastien",
+      "parentTwo": "Kim"
+    },
+    "ab064b26-97e7-408f-8362-964f9ce7da16": {
+      "birthday": "2019-10-14T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "ab064b26-97e7-408f-8362-964f9ce7da16",
+      "name": "Bryan",
+      "parentOne": "Christelle",
+      "parentTwo": "Francys"
+    },
+    "b2b9be1d-fd6f-473e-902d-32b61ec52e59": {
+      "birthday": "1988-05-27T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "b2b9be1d-fd6f-473e-902d-32b61ec52e59",
+      "name": "Antoine Capitaine"
+    },
+    "b3732149-53ed-4de7-bc5a-019bc8012a6a": {
+      "birthday": "1896-05-03T00:00:00.000Z",
+      "groups": ["Meetup"],
+      "id": "b3732149-53ed-4de7-bc5a-019bc8012a6a",
+      "name": "Delphine"
+    },
+    "b7a15949-b66b-4497-8e1b-f37b40f03e49": {
+      "birthday": "2016-12-06T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "b7a15949-b66b-4497-8e1b-f37b40f03e49",
+      "name": "Léandre",
+      "parentOne": "Kathleen",
+      "parentTwo": "Kévin"
+    },
+    "caa89866-cd99-44f4-9482-b4d87fb12a60": {
+      "birthday": "2017-12-30T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "caa89866-cd99-44f4-9482-b4d87fb12a60",
+      "name": "Antoine",
+      "parentOne": "Matthieu",
+      "parentTwo": "Élise"
+    },
+    "d416bd33-bdea-4488-bad7-5cd5a987aefd": {
+      "birthday": "1989-10-14T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "d416bd33-bdea-4488-bad7-5cd5a987aefd",
+      "name": "Kévin"
+    },
+    "d5c9018c-64ae-4d19-8264-69bad09c8e11": {
+      "birthday": "2017-07-27T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "d5c9018c-64ae-4d19-8264-69bad09c8e11",
+      "name": "Jayson",
+      "parentOne": "Christelle",
+      "parentTwo": "Francys"
+    },
+    "deb54cab-02a4-404a-8897-937cd08be256": {
+      "birthday": "1985-12-14T00:00:00.000Z",
+      "groups": ["Meetup"],
+      "id": "deb54cab-02a4-404a-8897-937cd08be256",
+      "name": "Arnaud Grousset"
+    },
+    "e754070a-39c1-4c3f-8cbd-5653018613d0": {
+      "birthday": "1987-05-27T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "e754070a-39c1-4c3f-8cbd-5653018613d0",
+      "name": "Cécile"
+    },
+    "e7992a76-1033-45a1-9e3e-a07c6514ed3d": {
+      "birthday": "2020-04-17T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "e7992a76-1033-45a1-9e3e-a07c6514ed3d",
+      "name": "Gabriel",
+      "parentOne": "Marco",
+      "parentTwo": "Lili"
+    },
+    "ed83eb0e-24ef-4fb5-ab86-a8844f26d983": {
+      "birthday": "1986-07-10T00:00:00.000Z",
+      "groups": ["Belle famille"],
+      "id": "ed83eb0e-24ef-4fb5-ab86-a8844f26d983",
+      "name": "Line"
+    },
+    "ef3e9b8b-8e78-44a7-950a-5be27f138e4d": {
+      "birthday": "1988-02-21T00:00:00.000Z",
+      "groups": ["🇦🇺 OCTO & AU"],
+      "id": "ef3e9b8b-8e78-44a7-950a-5be27f138e4d",
+      "name": "Alex"
+    },
+    "ewjDdr7vbOXH5wXLmcUAu": {
+      "birthday": "2015-10-06T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "ewjDdr7vbOXH5wXLmcUAu",
+      "name": "Eléa",
+      "parentOne": "Julia",
+      "parentTwo": "Antoine Capitaine"
+    },
+    "f4ae5b12-de0c-4a19-9891-7889b8833366": {
+      "birthday": "2019-05-31T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "f4ae5b12-de0c-4a19-9891-7889b8833366",
+      "name": "Alba",
+      "parentOne": "Jacky",
+      "parentTwo": "Anaïs"
+    },
+    "f606f4e0-6151-4716-9e0c-57082c131fd1": {
+      "birthday": "1896-05-29T00:00:00.000Z",
+      "groups": ["Belle famille"],
+      "id": "f606f4e0-6151-4716-9e0c-57082c131fd1",
+      "name": "Olivier Duboc"
+    },
+    "fu7y-32oV5sOOYw7LIVqs": {
+      "birthday": "2015-04-13T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "fu7y-32oV5sOOYw7LIVqs",
+      "name": "Johanna",
+      "parentOne": "Damien",
+      "parentTwo": "Cécile"
+    },
+    "g9rbiF60gWV6xrPHXJbZB": {
+      "birthday": "2018-09-10T00:00:00.000Z",
+      "groups": ["🇨🇦 Canada & co"],
+      "id": "g9rbiF60gWV6xrPHXJbZB",
+      "name": "Alexis",
+      "parentOne": "Julia",
+      "parentTwo": "Antoine Capitaine"
+    },
+    "gozSLmHZDi5h4chDTRpq6": {
+      "birthday": "2019-08-02T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "gozSLmHZDi5h4chDTRpq6",
+      "name": "Sohen",
+      "parentOne": "David",
+      "parentTwo": "Maud"
+    },
+    "kS0jLbU3_DoqYiCu9g_V8": {
+      "birthday": "2021-09-25T00:00:00.000Z",
+      "groups": ["👨‍👩‍👧‍👦 Family"],
+      "id": "kS0jLbU3_DoqYiCu9g_V8",
+      "name": "Lynn",
+      "parentOne": "Christelle",
+      "parentTwo": "Francys"
+    },
+    "qqNqnb8KIR4YQ-R4DVjoN": {
+      "birthday": "2016-05-08T00:00:00.000Z",
+      "groups": ["SQLI & more"],
+      "id": "qqNqnb8KIR4YQ-R4DVjoN",
+      "name": "Manon",
+      "parentOne": "Coco",
+      "parentTwo": "Stéphanie"
+    },
+    "s1L9HILTcvxNvPQ3T5vEV": {
+      "birthday": "1896-01-04T00:00:00.000Z",
+      "groups": ["IUT & co"],
+      "id": "s1L9HILTcvxNvPQ3T5vEV",
+      "name": "Emiel"
+    },
+    "xhjp-jVrlarLgL6oxYaUF": {
+      "birthday": "2021-12-01T00:00:00.000Z",
+      "groups": ["🏓 Ping & co"],
+      "id": "xhjp-jVrlarLgL6oxYaUF",
+      "name": "Ewan",
+      "parentOne": "Nico",
+      "parentTwo": "Laureen"
+    }
+  },
+  "user": {
+    "email": "cedric.nicoloso@gmail.com",
+    "id": "VGbgHRPmB5PemfZ0ZtucC6t2h1s1",
+    "lastSeenAt": "2022-10-06T20:14:56.989Z",
+    "name": "Cedric Nicoloso",
+    "photoUrl": "https://lh3.googleusercontent.com/-OyPnmbDkF0k/AAAAAAAAAAI/AAAAAAAAChk/GUGJvIFfbgk/photo.jpg"
+  }
+}
