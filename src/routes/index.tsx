@@ -7,7 +7,7 @@ export default component$(() => {
   return (
     <>
       <Filters />
-      <div class="py-3 px-5">
+      <div class="py-3 px-5 mb-24">
         <List />
       </div>
     </>

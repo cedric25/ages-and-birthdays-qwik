@@ -1,12 +1,14 @@
-import { component$, Slot } from '@builder.io/qwik'
+import { component$, PropFunction, Slot } from '@builder.io/qwik'
 
 export const Chip = component$(
   ({
     color,
     count,
+    onClick$,
   }: {
     color: 'emerald' | 'indigo' | 'sky'
     count?: number
+    onClick$?: PropFunction<() => void>
   }) => {
     const cssClasses = {
       emerald: 'text-emerald-500 bg-emerald-500/10',
@@ -14,8 +16,10 @@ export const Chip = component$(
       sky: 'text-sky-500 bg-sky-500/10',
     }
     return (
-      <div
+      <button
+        type="button"
         class={`inline-flex items-center h-[28px] text-sm rounded-full ${cssClasses[color]}`}
+        {...(onClick$ && { onClick$ })}
       >
         {count && (
           <div class="inline-flex items-center justify-center rounded-full bg-gray-200 -mr-1 w-5 h-5 ml-1 text-xs font-bold">
@@ -25,7 +29,7 @@ export const Chip = component$(
         <span className="py-[0.1rem] px-3">
           <Slot />
         </span>
-      </div>
+      </button>
     )
   }
 )

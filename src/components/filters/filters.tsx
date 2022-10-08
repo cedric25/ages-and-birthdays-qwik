@@ -1,9 +1,19 @@
 import { component$, useContext, useStore } from '@builder.io/qwik'
 import { Chip } from '~/components/chip/chip'
-import { AppContext } from '~/root'
+import { AppContext, UserState } from '~/root'
 
 type State = {
   showFilters: boolean
+}
+
+export function toggleGroup(groupLabel: string, userState: UserState) {
+  if (userState.selectedGroups.indexOf(groupLabel) !== -1) {
+    userState.selectedGroups = userState.selectedGroups.filter(group => {
+      return group !== groupLabel
+    })
+  } else {
+    userState.selectedGroups = [...userState.selectedGroups, groupLabel]
+  }
 }
 
 export default component$(() => {
@@ -34,7 +44,14 @@ export default component$(() => {
           <div>
             {userState.groups.map(group => (
               <span class="inline-block mr-1.5 mb-1.5">
-                <Chip color={'sky'} count={group.count}>
+                <Chip
+                  color={'sky'}
+                  count={group.count}
+                  onClick$={() => {
+                    toggleGroup(group.label, userState)
+                    // userState.selectedGroups = ['Toto']
+                  }}
+                >
                   {group.label}
                 </Chip>
               </span>

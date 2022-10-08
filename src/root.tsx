@@ -4,6 +4,7 @@ import {
   useStore,
   useContextProvider,
   createContext,
+  useContext,
 } from '@builder.io/qwik'
 import {
   QwikCity,
@@ -23,6 +24,7 @@ export interface UserState {
   user: User | null
   importantPersons: Record<string, Person>
   groups: Group[]
+  selectedGroups: string[]
 }
 export const AppContext = createContext<UserState>('app-context')
 
@@ -31,6 +33,7 @@ export default component$(() => {
     user: null,
     importantPersons: {},
     groups: [],
+    selectedGroups: [],
   })
 
   useContextProvider(AppContext, userState)
