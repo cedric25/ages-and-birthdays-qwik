@@ -1,10 +1,12 @@
 import { getDatabase, ref, child, get, set, update } from 'firebase/database'
 import type { User } from '~/@types/User'
-import type { Person } from '~/@types/Person'
+import type { DbPerson, Person } from '~/@types/Person'
 import type { Group } from '~/@types/Group'
+import { YEAR_FOR_NO_YEAR } from '~/constants/constants'
+import { getDaysUntilBirthday } from '~/helpers/daysUntilBirthday'
+
 // FOR TESTS
 import dbTestContent from './dbTestContent.json'
-import { YEAR_FOR_NO_YEAR } from '~/constants/constants'
 
 export async function getUserData(userId: string) {
   // const userDataSnapshot = await readUserDataOnce(userId)
@@ -20,18 +22,22 @@ export async function getUserData(userId: string) {
   }
 }
 
-function formatPersonsFromDb(persons: Record<string, Person>) {
+function formatPersonsFromDb(persons: Record<string, DbPerson>) {
   return Object.values(persons).reduce((result, person) => {
     result[person.id] = {
       ...person,
       // Until everything is string in db
       birthday: getBirthdayFromIsoDate(person.birthday),
+      daysUntilBirthday: getDaysUntilBirthday(person.birthday),
     }
     return result
   }, {} as Record<string, Person>)
 }
 
-function formatGroupsFromDb(groups: string[], persons: Record<string, Person>) {
+function formatGroupsFromDb(
+  groups: string[],
+  persons: Record<string, DbPerson>
+) {
   return groups.map(groupLabel => ({
     label: groupLabel,
     count: Object.values(persons).filter(

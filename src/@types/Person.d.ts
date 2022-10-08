@@ -1,7 +1,7 @@
 import type { Group } from '@/@types/Group'
 import type { Parent } from '@/@types/Parent'
 
-export type Person = {
+export type DbPerson = {
   id: string
   name: string
   birthday: string
@@ -12,6 +12,10 @@ export type Person = {
   meta?: {
     from: string // 'google'
   }
+}
+
+export type Person = DbPerson & {
+  daysUntilBirthday: number
 }
 
 export type PersonUpdateInput = {
