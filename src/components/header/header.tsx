@@ -11,7 +11,6 @@ export default component$(() => {
       <button
         type="button"
         onClick$={() => {
-          console.log('plop')
           signUserInGoogle()
         }}
       >

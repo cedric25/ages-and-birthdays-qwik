@@ -22,7 +22,7 @@ export const Chip = component$(
         type="button"
         class={`inline-flex items-center h-[28px] text-sm rounded-full ${
           cssClasses[color]
-        } ${selected ? 'shadow-inner shadow-primary' : ''}`}
+        } ${selected ? 'border border-2 border-primary px-0' : 'px-[2px]'}`}
         {...(onClick$ && { onClick$ })}
       >
         {count && (

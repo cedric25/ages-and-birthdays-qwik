@@ -24,8 +24,8 @@ export async function getUserData(userId: string) {
   }
 }
 
-function formatPersonsFromDb(persons: Record<string, DbPerson>) {
-  return Object.values(persons).reduce((result, person) => {
+function formatPersonsFromDb(dbPersons: Record<string, DbPerson>) {
+  const persons = Object.values(dbPersons).reduce((result, person) => {
     const age = computeAge(person.birthday)
     result[person.id] = {
       ...person,
@@ -37,6 +37,7 @@ function formatPersonsFromDb(persons: Record<string, DbPerson>) {
     }
     return result
   }, {} as Record<string, Person>)
+  return persons
 }
 
 function formatGroupsFromDb(
@@ -54,7 +55,7 @@ function formatGroupsFromDb(
 function getBirthdayFromIsoDate(birthday: string) {
   const year = birthday.substring(0, 4)
   if (year === String(YEAR_FOR_NO_YEAR)) {
-    return birthday.substring(5, 5)
+    return birthday.substring(5, 10)
   }
   return birthday.substring(0, 10)
 }
