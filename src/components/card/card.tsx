@@ -39,6 +39,17 @@ export const Card = component$(({ person }: { person: Person }) => {
           </span>
         </div>
         <div class="text-center">{birthdayText}</div>
+        {person.children && (
+          <div class="mt-3">
+            {person.children.map(child => (
+              <div class="grid grid-cols-3 border-t px-3 py-1 text-sm text-gray-600">
+                <div>👶&nbsp; {child.name}</div>
+                <div>{getReadableBirthday(child.birthday)}</div>
+                <div>{getReadableAge(child.birthday)}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

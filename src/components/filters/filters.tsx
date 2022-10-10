@@ -1,20 +1,10 @@
-import { component$, mutable, useContext, useStore } from '@builder.io/qwik'
+import { $, component$, mutable, useContext, useStore } from '@builder.io/qwik'
 import { AppContext, UserState } from '~/root'
 import { Chip } from '~/components/chip/chip'
 import Search from '~/components/filters/search'
 
 type State = {
   showFilters: boolean
-}
-
-export function toggleGroup(groupLabel: string, userState: UserState) {
-  if (userState.selectedGroups.indexOf(groupLabel) !== -1) {
-    userState.selectedGroups = userState.selectedGroups.filter(group => {
-      return group !== groupLabel
-    })
-  } else {
-    userState.selectedGroups = [...userState.selectedGroups, groupLabel]
-  }
 }
 
 export function isGroupSelected(groupLabel: string, userState: UserState) {
@@ -29,6 +19,16 @@ export default component$(() => {
   })
 
   const userState = useContext(AppContext)
+
+  const toggleGroup = $((groupLabel: string) => {
+    if (userState.selectedGroups.indexOf(groupLabel) !== -1) {
+      userState.selectedGroups = userState.selectedGroups.filter(group => {
+        return group !== groupLabel
+      })
+    } else {
+      userState.selectedGroups = [...userState.selectedGroups, groupLabel]
+    }
+  })
 
   return (
     <div class="w-full flex">
@@ -52,7 +52,7 @@ export default component$(() => {
                   count={group.count}
                   selected={mutable(isGroupSelected(group.label, userState))}
                   onClick$={() => {
-                    toggleGroup(group.label, userState)
+                    toggleGroup(group.label)
                   }}
                 >
                   {group.label}

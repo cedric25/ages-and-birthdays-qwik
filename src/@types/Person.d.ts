@@ -9,7 +9,7 @@ export type DbPerson = {
   groups?: Group[]
   parentOne?: Parent
   parentTwo?: Parent
-  children?: Child[]
+  children?: DbPerson[]
   meta?: {
     from: string // 'google'
   }
