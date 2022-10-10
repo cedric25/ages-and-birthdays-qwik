@@ -63,7 +63,7 @@ export default component$(() => {
             ))}
           </div>
           {/*<div>Sort by upcoming birthday</div>*/}
-          <div class="text-center">
+          <div class="text-center -mt-1.5">
             <button
               class="rounded-md px-3 py-1 bg-sky-200"
               onClick$={() => {

@@ -13,14 +13,21 @@ export const Card = component$(({ person }: { person: Person }) => {
   const birthdayText = getBirthdayText(person.birthday, age)
 
   return (
-    <div class="bg-white shadow px-2 pb-5 pt-2 rounded-lg">
+    <div class="bg-white shadow px-2 pb-4 pt-2 rounded-lg">
       <div>
         {person.groups?.map(group => (
           <Chip color={'sky'}>{group}</Chip>
         ))}
       </div>
       <div class="flex flex-col gap-y-1">
-        <div class="text-center text-lg">
+        {person.parentOne && person.parentTwo ? (
+          <div class="mt-2 text-center text-sm -mb-1">
+            ({person.parentOne} + {person.parentTwo})
+          </div>
+        ) : (
+          ''
+        )}
+        <div class="text-center text-xl">
           {person.name} {person.isBaby && <span>👶</span>}
         </div>
         <div class="flex gap-x-2">
