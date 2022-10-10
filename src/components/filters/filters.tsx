@@ -1,6 +1,7 @@
 import { component$, mutable, useContext, useStore } from '@builder.io/qwik'
-import { Chip } from '~/components/chip/chip'
 import { AppContext, UserState } from '~/root'
+import { Chip } from '~/components/chip/chip'
+import Search from '~/components/filters/search'
 
 type State = {
   showFilters: boolean
@@ -23,6 +24,7 @@ export function isGroupSelected(groupLabel: string, userState: UserState) {
 export default component$(() => {
   const state = useStore<State>({
     // showFilters: false,
+    // FOR TESTS
     showFilters: true,
   })
 
@@ -41,10 +43,7 @@ export default component$(() => {
         </button>
       ) : (
         <div class="p-3 flex flex-col gap-3 w-full border-b border-b-primary">
-          <input
-            placeholder="Search..."
-            class="border py-1 rounded-lg px-2 w-full"
-          />
+          <Search />
           <div>
             {userState.groups.map(group => (
               <span class="inline-block mr-1.5 mb-1.5">
@@ -54,7 +53,6 @@ export default component$(() => {
                   selected={mutable(isGroupSelected(group.label, userState))}
                   onClick$={() => {
                     toggleGroup(group.label, userState)
-                    // userState.selectedGroups = ['Toto']
                   }}
                 >
                   {group.label}
@@ -62,7 +60,6 @@ export default component$(() => {
               </span>
             ))}
           </div>
-          {/*<div>Sort by upcoming birthday</div>*/}
           <div class="text-center -mt-1.5">
             <button
               class="rounded-md px-3 py-1 bg-sky-200"

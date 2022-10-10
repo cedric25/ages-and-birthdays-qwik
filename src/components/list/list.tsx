@@ -1,4 +1,5 @@
 import { component$, useWatch$, useContext, useStore } from '@builder.io/qwik'
+import deburr from 'lodash.deburr'
 import { Person } from '~/@types/Person'
 import { AppContext } from '~/root'
 import { Card } from '~/components/card/card'
@@ -29,14 +30,25 @@ export default component$(() => {
   useWatch$(({ track }) => {
     // rerun this function  when `value` property changes.
     track(userState, 'selectedGroups')
+    track(userState, 'searchTerm')
     const importantPersons = Object.values(userState.importantPersons)
-    if (userState.selectedGroups.length) {
-      const filteredPersons = importantPersons.filter(person => {
-        const commonGroups = userState.selectedGroups.filter(group => {
-          return person.groups && person.groups.includes(group)
+    if (userState.selectedGroups.length || userState.searchTerm) {
+      let filteredPersons = importantPersons
+      if (userState.selectedGroups.length) {
+        filteredPersons = importantPersons.filter(person => {
+          const commonGroups = userState.selectedGroups.filter(group => {
+            return person.groups && person.groups.includes(group)
+          })
+          return commonGroups.length > 0
         })
-        return commonGroups.length > 0
-      })
+      }
+      if (userState.searchTerm) {
+        filteredPersons = filteredPersons.filter(
+          person =>
+            deburr(person.name.toLowerCase()).indexOf(userState.searchTerm) !==
+            -1
+        )
+      }
       state.persons = sortPersons(filteredPersons)
     } else {
       state.persons = sortPersons(importantPersons)
@@ -44,10 +56,15 @@ export default component$(() => {
   })
 
   return (
-    <div class="grid gap-5 mt-5">
-      {state.persons.map(person => (
-        <Card key={person.id} person={person} />
-      ))}
-    </div>
+    <>
+      <div className="text-right mb-3">
+        {Object.keys(userState.importantPersons).length} persons
+      </div>
+      <div class="grid gap-5">
+        {state.persons.map(person => (
+          <Card key={person.id} person={person} />
+        ))}
+      </div>
+    </>
   )
 })

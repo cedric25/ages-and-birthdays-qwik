@@ -22,12 +22,14 @@
   },
   "dependencies": {
     "dayjs": "1.11.5",
-    "firebase": "9.10.0"
+    "firebase": "9.10.0",
+    "lodash.deburr": "4.1.0"
   },
   "devDependencies": {
     "@builder.io/qwik": "0.9.0",
     "@builder.io/qwik-city": "0.0.111",
     "@types/eslint": "8.4.6",
+    "@types/lodash.deburr": "4.1.7",
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",

@@ -24,6 +24,7 @@ export interface UserState {
   user: User | null
   importantPersons: Record<string, Person>
   groups: Group[]
+  searchTerm: string
   selectedGroups: string[]
 }
 export const AppContext = createContext<UserState>('app-context')
@@ -33,6 +34,7 @@ export default component$(() => {
     user: null,
     importantPersons: {},
     groups: [],
+    searchTerm: '',
     selectedGroups: [],
   })
 
