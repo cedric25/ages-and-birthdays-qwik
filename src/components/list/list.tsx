@@ -57,8 +57,11 @@ export default component$(() => {
 
   return (
     <>
-      <div className="text-right mb-3">
-        {Object.keys(userState.importantPersons).length} persons
+      <div className="text-right mb-3 text-sm">
+        {Object.keys(userState.importantPersons).length}
+        {Object.keys(userState.importantPersons).length <= 1
+          ? ' person'
+          : ' persons'}
       </div>
       <div class="grid gap-5">
         {state.persons.map(person => (
