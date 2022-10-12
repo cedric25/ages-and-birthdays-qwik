@@ -13,7 +13,7 @@ export const Card = component$(({ person }: { person: Person }) => {
   const birthdayText = getBirthdayText(person.birthday, age)
 
   return (
-    <div class="bg-white shadow px-2 pb-4 pt-2 rounded-lg">
+    <div class="bg-white shadow p-2 rounded-lg">
       <div>
         {person.groups?.map(group => (
           <Chip color={'sky'}>{group}</Chip>

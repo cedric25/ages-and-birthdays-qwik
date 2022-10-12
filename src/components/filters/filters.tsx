@@ -13,12 +13,47 @@ export function isGroupSelected(groupLabel: string, userState: UserState) {
 
 export default component$(() => {
   const state = useStore<State>({
-    // showFilters: false,
+    showFilters: false,
     // FOR TESTS
-    showFilters: true,
+    // showFilters: true,
   })
 
   const userState = useContext(AppContext)
+
+  const expandAnimationProps = {
+    duration: 300,
+    easing: 'ease-out',
+  }
+
+  const toggleShowFilters = $(() => {
+    const el = document.getElementsByClassName('filters-wrap')[0]
+    // Expand
+    if (!state.showFilters) {
+      const expandAnimation = el.animate(
+        {
+          height: ['0px', '200px'],
+        },
+        expandAnimationProps
+      )
+      expandAnimation.onfinish = () => {
+        ;(el as HTMLElement).style.height = '200px'
+      }
+    }
+    // Collapse
+    else {
+      const collapseAnimation = el.animate(
+        {
+          height: ['200px', '0px'],
+        },
+        expandAnimationProps
+      )
+      collapseAnimation.onfinish = () => {
+        ;(el as HTMLElement).style.height = '0px'
+      }
+    }
+
+    state.showFilters = !state.showFilters
+  })
 
   const toggleGroup = $((groupLabel: string) => {
     if (userState.selectedGroups.indexOf(groupLabel) !== -1) {
@@ -31,18 +66,23 @@ export default component$(() => {
   })
 
   return (
-    <div class="w-full flex">
-      {!state.showFilters ? (
+    <>
+      <div class="m-2 mb-0 text-center">
         <button
-          class="m-2 flex-1 rounded-lg bg-sky-200 tracking-wide h-top-filters"
-          onClick$={() => {
-            state.showFilters = true
-          }}
+          class={`h-12 rounded-lg px-3 tracking-wide h-10 transition-all ${
+            state.showFilters ? 'bg-gray-200 w-[72px]' : 'bg-sky-200 w-full'
+          }`}
+          onClick$={toggleShowFilters}
         >
-          Filters
+          {state.showFilters ? 'Close' : 'Filters'}
         </button>
-      ) : (
-        <div class="p-3 flex flex-col gap-3 w-full border-b border-b-primary">
+      </div>
+      <div
+        class={`h-0 overflow-hidden filters-wrap w-full ${
+          state.showFilters ? 'border-b border-b-primary' : ''
+        }`}
+      >
+        <div class="p-3 flex flex-col gap-3">
           <Search />
           <div>
             {userState.groups.map(group => (
@@ -60,18 +100,8 @@ export default component$(() => {
               </span>
             ))}
           </div>
-          <div class="text-center -mt-1.5">
-            <button
-              class="rounded-md px-3 py-1 bg-sky-200"
-              onClick$={() => {
-                state.showFilters = false
-              }}
-            >
-              Close
-            </button>
-          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   )
 })
