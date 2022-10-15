@@ -88,8 +88,8 @@ export default component$(() => {
     <>
       <div class="m-2 mb-0 text-center flex justify-center">
         <button
-          class={`relative h-12 rounded-lg px-3 tracking-wide h-10 transition-all ${
-            state.showFilters ? 'bg-gray-200 w-[72px]' : 'bg-sky-200 w-full'
+          class={`flex-1 relative h-12 rounded-lg px-3 tracking-wide h-10 transition-all ${
+            state.showFilters ? 'bg-gray-200' : 'bg-sky-200'
           }`}
           onClick$={toggleShowFilters}
         >
@@ -100,15 +100,17 @@ export default component$(() => {
             </span>
           )}
         </button>
-        {!state.showFilters && state.hasActiveFilters && (
-          <button
-            type="button"
-            class="ml-2 px-2 text-orange-400"
-            onClick$={resetFilters}
-          >
-            Reset
-          </button>
-        )}
+        <button
+          type="button"
+          class={`text-orange-400 transition-[width] ${
+            !state.showFilters && state.hasActiveFilters
+              ? 'ml-2 px-2 w-[60px]'
+              : 'w-0 overflow-hidden'
+          }`}
+          onClick$={resetFilters}
+        >
+          Reset
+        </button>
       </div>
       <div
         class={`h-0 overflow-hidden filters-wrap w-full ${
