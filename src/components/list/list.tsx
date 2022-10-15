@@ -57,12 +57,11 @@ export default component$(() => {
 
   return (
     <>
-      <div className="text-right mb-3 text-sm">
-        {Object.keys(userState.importantPersons).length}
-        {Object.keys(userState.importantPersons).length <= 1
-          ? ' person'
-          : ' persons'}
-      </div>
+      {Object.keys(state.persons).length > 1 && (
+        <div className="text-right mb-3 text-sm">
+          {Object.keys(state.persons).length} persons
+        </div>
+      )}
       <div class="grid gap-5">
         {state.persons.map(person => (
           <Card key={person.id} person={person} />
