@@ -8,22 +8,20 @@ export default component$(() => {
   const userState = useContext(AppContext)
 
   return (
-    <header class="bg-primary pl-5 pr-2 flex fixed w-full h-top-menu flex items-center z-10">
+    <header class="fixed z-10 flex flex h-top-menu w-full items-center bg-primary pl-5 pr-2">
       <div class="flex-1">
-        <Link class="text-white text-xl" href="/">
+        <Link class="text-xl text-white" href="/">
           Ages & Birthdays
         </Link>
       </div>
       {userState.user ? (
         <UserMenu />
       ) : (
-        <button
-          type="button"
-          class="mr-3"
-          onClick$={() => signUserWithGoogle(userState)}
-        >
-          <img src="/icon-smile.svg" className="w-[25px]" />
-        </button>
+        <div class="tooltip tooltip-bottom mr-3" data-tip="Sign in">
+          <button type="button" onClick$={() => signUserWithGoogle(userState)}>
+            <img src="/icon-smile.svg" className="w-[25px]" />
+          </button>
+        </div>
       )}
     </header>
   )
