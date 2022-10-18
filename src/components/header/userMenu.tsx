@@ -18,16 +18,16 @@ export default component$(() => {
 
   return (
     <div class="dropdown dropdown-end">
-      <label tabIndex={0} class="btn btn-ghost btn-circle avatar">
+      <label tabIndex={0} class="avatar btn btn-ghost btn-circle">
         <div class="w-10 rounded-full border border-white">
           {userState.user && userState.user.photoUrl ? (
             <img
               src={userState.user.photoUrl}
               alt={userState.user.name}
-              class="rounded-full -mr-2"
+              class="-mr-2 rounded-full"
             />
           ) : (
-            <div class="flex w-full h-full items-center justify-center text-xl">
+            <div class="flex h-full w-full items-center justify-center text-xl">
               {userState.user && userState.user.name.substring(0, 1)}
             </div>
           )}
@@ -35,10 +35,11 @@ export default component$(() => {
       </label>
       <ul
         tabIndex={0}
-        class="z-[1000] mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+        class="dropdown-content menu rounded-box menu-compact z-[1000] mt-2 w-52 bg-base-100 p-2 shadow"
       >
         <li>
           <button type="button" class="hover:bg-sky-100" onClick$={signOut}>
+            <img src="/fa6-solid_arrow-right-from-bracket.svg" />
             Sign out
           </button>
         </li>
