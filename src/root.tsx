@@ -3,8 +3,6 @@ import {
   useClientEffect$,
   useStore,
   useContextProvider,
-  createContext,
-  useContext,
 } from '@builder.io/qwik'
 import {
   QwikCity,
@@ -12,22 +10,11 @@ import {
   ServiceWorkerRegister,
 } from '@builder.io/qwik-city'
 import { RouterHead } from '~/components/router-head/router-head'
-import { User } from '~/@types/User'
-import { Person } from '~/@types/Person'
-import { Group } from '~/@types/Group'
-import { initFirebase } from '~/services/firebase/firebase.js'
+import { initFirebase } from '~/services/firebase/firebase'
 import { getUserData } from '~/services/db'
+import { AppContext, UserState } from '~/appContext'
 
 import './global.css'
-
-export interface UserState {
-  user: User | null
-  importantPersons: Record<string, Person>
-  groups: Group[]
-  searchTerm: string
-  selectedGroups: string[]
-}
-export const AppContext = createContext<UserState>('app-context')
 
 export default component$(() => {
   const userState = useStore<UserState>({

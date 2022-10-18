@@ -2,11 +2,12 @@ import {
   $,
   component$,
   mutable,
+  useClientEffect$,
   useContext,
   useStore,
   useWatch$,
 } from '@builder.io/qwik'
-import { AppContext, UserState } from '~/root'
+import { AppContext, UserState } from '~/appContext'
 import { Chip } from '~/components/chip/chip'
 import Search from '~/components/filters/search'
 
@@ -16,13 +17,15 @@ export function isGroupSelected(groupLabel: string, userState: UserState) {
 
 export default component$(() => {
   const state = useStore<{
+    isLoaded: boolean
     showFilters: boolean
     hasActiveFilters: boolean
+    filtersWrapHeight: number | null
   }>({
-    showFilters: false,
-    // FOR TESTS
-    // showFilters: true,
+    isLoaded: false,
+    showFilters: true,
     hasActiveFilters: false,
+    filtersWrapHeight: null,
   })
 
   const userState = useContext(AppContext)
@@ -39,34 +42,71 @@ export default component$(() => {
     easing: 'ease-out',
   }
 
+  const expandFilters = $((filtersWrapElement: HTMLElement) => {
+    console.log('-> expandFilters', state.filtersWrapHeight)
+    const expandAnimation = filtersWrapElement.animate(
+      {
+        height: ['0px', `${state.filtersWrapHeight}px`],
+      },
+      expandAnimationProps
+    )
+    expandAnimation.onfinish = () => {
+      ;(
+        filtersWrapElement as HTMLElement
+      ).style.height = `${state.filtersWrapHeight}px`
+    }
+
+    state.showFilters = true
+  })
+
+  const collapseFilters = $((filtersWrapElement: HTMLElement) => {
+    console.log('-> collapseFilters')
+    const collapseAnimation = filtersWrapElement.animate(
+      {
+        height: [`${state.filtersWrapHeight}px`, '0px'],
+      },
+      expandAnimationProps
+    )
+    collapseAnimation.onfinish = () => {
+      ;(filtersWrapElement as HTMLElement).style.height = '0px'
+    }
+
+    state.showFilters = false
+  })
+
   const toggleShowFilters = $(() => {
-    const el = document.getElementsByClassName('filters-wrap')[0]
+    console.log('-> toggleShowFilters')
+    const filtersWrapElement = document.getElementsByClassName(
+      'filters-wrap'
+    )[0] as HTMLElement
     // Expand
     if (!state.showFilters) {
-      const expandAnimation = el.animate(
-        {
-          height: ['0px', '200px'],
-        },
-        expandAnimationProps
-      )
-      expandAnimation.onfinish = () => {
-        ;(el as HTMLElement).style.height = '200px'
-      }
+      expandFilters(filtersWrapElement)
     }
     // Collapse
     else {
-      const collapseAnimation = el.animate(
-        {
-          height: ['200px', '0px'],
-        },
-        expandAnimationProps
-      )
-      collapseAnimation.onfinish = () => {
-        ;(el as HTMLElement).style.height = '0px'
-      }
+      collapseFilters(filtersWrapElement)
     }
+  })
 
-    state.showFilters = !state.showFilters
+  // On user groups loaded, calculate height of filters block
+  useClientEffect$(async ({ track }) => {
+    track(userState, 'groups')
+    console.log('\n(useClientEffect$)')
+    console.log('-> userState.groups', userState.groups)
+    const filtersWrapElement = document.getElementsByClassName(
+      'filters-wrap'
+    )[0] as HTMLElement
+    if (!state.showFilters) {
+      state.showFilters = true
+    }
+    setTimeout(() => {
+      state.filtersWrapHeight = filtersWrapElement.offsetHeight
+      console.log('state.filtersWrapHeight', state.filtersWrapHeight)
+      state.showFilters = false
+      state.isLoaded = true
+    }, 1) // Not sure why I need that. Without it, groups are not yet rendered into the view,
+    // so the offsetHeight is wrong
   })
 
   const resetFilters = $(() => {
@@ -86,42 +126,43 @@ export default component$(() => {
 
   return (
     <>
-      <div class="m-2 mb-0 text-center flex justify-center">
+      <div class="mx-4 mt-4 mb-2 flex justify-center text-center">
         <button
-          class={`flex-1 relative h-12 rounded-lg px-3 tracking-wide h-10 transition-all ${
-            state.showFilters ? 'bg-gray-200' : 'bg-sky-200'
+          class={`relative h-10 flex-1 rounded-lg px-3 tracking-wide ${
+            state.isLoaded && state.showFilters ? 'bg-gray-200' : 'bg-sky-200'
           }`}
           onClick$={toggleShowFilters}
         >
-          {state.showFilters ? 'Close' : 'Filters'}
+          {state.isLoaded && state.showFilters ? 'Close' : 'Filters'}
           {!state.showFilters && state.hasActiveFilters && (
-            <span class="absolute top-[10px] ml-[4px] w-2 h-2 rounded-full bg-green-500">
+            <span class="absolute top-[10px] ml-[4px] h-2 w-2 rounded-full bg-green-500">
               &nbsp;
             </span>
           )}
         </button>
         <button
           type="button"
-          class={`text-orange-400 transition-[width] ${
-            !state.showFilters && state.hasActiveFilters
-              ? 'ml-2 px-2 w-[60px]'
-              : 'w-0 overflow-hidden'
+          class={`grow-0 text-orange-400 duration-500 ease-in-out ${
+            state.hasActiveFilters
+              ? 'w-[68px] scale-100 opacity-100'
+              : 'w-0 scale-0 overflow-hidden opacity-0'
           }`}
+          style="transition-property: width, opacity, transform;"
           onClick$={resetFilters}
         >
-          Reset
+          <div class="ml-2 inline-block px-2">Reset</div>
         </button>
       </div>
       <div
-        class={`h-0 overflow-hidden filters-wrap w-full ${
-          state.showFilters ? 'border-b border-b-primary' : ''
-        }`}
+        class={`filters-wrap mx-4 overflow-hidden rounded-lg shadow-md ${
+          state.isLoaded && !state.showFilters ? 'h-0 overflow-hidden' : ''
+        } ${!state.isLoaded ? 'absolute opacity-0' : ''}`}
       >
-        <div class="p-3 flex flex-col gap-3">
+        <div class="flex flex-col gap-3 p-3">
           <Search />
           <div>
             {userState.groups.map(group => (
-              <span class="inline-block mr-1.5 mb-1.5">
+              <span class="mr-1.5 mb-1.5 inline-block">
                 <Chip
                   color={'sky'}
                   count={group.count}

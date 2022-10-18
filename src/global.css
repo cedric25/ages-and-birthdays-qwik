@@ -5,11 +5,9 @@
 @layer base {
   :root {
     --top-menu-height: 56px;
-    --top-filters-height: 40px;
   }
 
   body {
-    background-color: #fafafa;
     font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system,
       BlinkMacSystemFont, sans-serif;
   }

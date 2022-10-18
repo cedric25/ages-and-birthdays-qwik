@@ -1,7 +1,7 @@
 import { component$, useWatch$, useContext, useStore } from '@builder.io/qwik'
 import deburr from 'lodash.deburr'
 import { Person } from '~/@types/Person'
-import { AppContext } from '~/root'
+import { AppContext } from '~/appContext'
 import { Card } from '~/components/card/card'
 
 export function sortPersons(personsList: Person[]) {

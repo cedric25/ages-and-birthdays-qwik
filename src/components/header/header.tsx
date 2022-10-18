@@ -1,40 +1,26 @@
 import { component$, useContext } from '@builder.io/qwik'
 import { Link } from '@builder.io/qwik-city'
-import { AppContext } from '~/root'
-import { signUserInGoogle } from './signUserInGoogle'
+import { AppContext } from '~/appContext'
+import { signUserWithGoogle } from '~/services/firebase/firebase'
+import UserMenu from '~/components/header/userMenu'
 
 export default component$(() => {
   const userState = useContext(AppContext)
 
   return (
-    <header class="bg-primary px-5 flex fixed w-full h-top-menu flex items-center">
-      <Link class="flex-1 text-white text-xl" href="/">
-        Ages & Birthdays
-      </Link>
+    <header class="bg-primary pl-5 pr-2 flex fixed w-full h-top-menu flex items-center z-10">
+      <div class="flex-1">
+        <Link class="text-white text-xl" href="/">
+          Ages & Birthdays
+        </Link>
+      </div>
       {userState.user ? (
-        <button
-          type="button"
-          class="flex border border-white rounded-full"
-          style="width: 36px; height: 36px"
-        >
-          {userState.user.photoUrl ? (
-            <img
-              src={userState.user.photoUrl}
-              alt={userState.user.name}
-              class="rounded-full"
-            />
-          ) : (
-            <div className="flex w-full h-full items-center justify-center text-xl">
-              {userState.user.name.substring(0, 1)}
-            </div>
-          )}
-        </button>
+        <UserMenu />
       ) : (
         <button
           type="button"
-          onClick$={() => {
-            signUserInGoogle()
-          }}
+          class="mr-3"
+          onClick$={() => signUserWithGoogle(userState)}
         >
           <img src="/icon-smile.svg" className="w-[25px]" />
         </button>

@@ -13,12 +13,25 @@ module.exports = {
       },
       height: {
         'top-menu': 'var(--top-menu-height)',
-        'top-filters': 'var(--top-filters-height)',
       },
       padding: {
         'top-menu': 'var(--top-menu-height)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          // primary: '#a991f7',
+          // secondary: '#f6d860',
+          // accent: '#37cdbe',
+          // neutral: '#3d4451',
+          'base-100': '#fafafa',
+        },
+      },
+    ],
+  },
 }

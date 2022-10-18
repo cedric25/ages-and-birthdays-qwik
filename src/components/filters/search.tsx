@@ -1,6 +1,6 @@
 import { component$, useStore, $, useContext } from '@builder.io/qwik'
 import deburr from 'lodash.deburr'
-import { AppContext } from '~/root'
+import { AppContext } from '~/appContext'
 
 export default component$(() => {
   const state = useStore<{
