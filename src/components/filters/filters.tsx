@@ -43,7 +43,6 @@ export default component$(() => {
   }
 
   const expandFilters = $((filtersWrapElement: HTMLElement) => {
-    console.log('-> expandFilters', state.filtersWrapHeight)
     const expandAnimation = filtersWrapElement.animate(
       {
         height: ['0px', `${state.filtersWrapHeight}px`],
@@ -60,7 +59,6 @@ export default component$(() => {
   })
 
   const collapseFilters = $((filtersWrapElement: HTMLElement) => {
-    console.log('-> collapseFilters')
     const collapseAnimation = filtersWrapElement.animate(
       {
         height: [`${state.filtersWrapHeight}px`, '0px'],
@@ -75,7 +73,6 @@ export default component$(() => {
   })
 
   const toggleShowFilters = $(() => {
-    console.log('-> toggleShowFilters')
     const filtersWrapElement = document.getElementsByClassName(
       'filters-wrap'
     )[0] as HTMLElement
@@ -92,8 +89,6 @@ export default component$(() => {
   // On user groups loaded, calculate height of filters block
   useClientEffect$(async ({ track }) => {
     track(userState, 'groups')
-    console.log('\n(useClientEffect$)')
-    console.log('-> userState.groups', userState.groups)
     const filtersWrapElement = document.getElementsByClassName(
       'filters-wrap'
     )[0] as HTMLElement
@@ -102,7 +97,6 @@ export default component$(() => {
     }
     setTimeout(() => {
       state.filtersWrapHeight = filtersWrapElement.offsetHeight
-      console.log('state.filtersWrapHeight', state.filtersWrapHeight)
       state.showFilters = false
       state.isLoaded = true
     }, 1) // Not sure why I need that. Without it, groups are not yet rendered into the view,
