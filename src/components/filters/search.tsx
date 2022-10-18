@@ -1,4 +1,10 @@
-import { component$, useStore, $, useContext } from '@builder.io/qwik'
+import {
+  component$,
+  useStore,
+  $,
+  useContext,
+  useWatch$,
+} from '@builder.io/qwik'
 import deburr from 'lodash.deburr'
 import { AppContext } from '~/appContext'
 
@@ -10,6 +16,11 @@ export default component$(() => {
   })
 
   const userState = useContext(AppContext)
+
+  useWatch$(({ track }) => {
+    track(userState, 'searchTerm')
+    state.searchTerm = userState.searchTerm
+  })
 
   const onSearchTerm = $((searchTerm: string) => {
     state.searchTerm = searchTerm
@@ -30,7 +41,7 @@ export default component$(() => {
   return (
     <input
       placeholder="Search..."
-      className="border py-1 rounded-lg px-2 w-full"
+      className="w-full rounded-lg border py-1 px-2"
       value={state.searchTerm}
       onInput$={e => onSearchTerm((e.target as HTMLInputElement).value)}
       onKeyUp$={onKeyUp}
