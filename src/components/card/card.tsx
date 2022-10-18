@@ -10,10 +10,10 @@ export const Card = component$(({ person }: { person: Person }) => {
   const age = computeAge(person.birthday)
   const readableBirthday = getReadableBirthday(person.birthday)
   const readableAge = getReadableAge(person.birthday)
-  const birthdayText = getBirthdayText(person.birthday, age)
+  const birthdayLine = getBirthdayText(person.birthday, age)
 
   return (
-    <div class="bg-white shadow p-2 rounded-lg">
+    <div class="rounded-lg bg-white p-2 shadow">
       <div>
         {person.groups?.map(group => (
           <Chip color={'sky'}>{group}</Chip>
@@ -21,7 +21,7 @@ export const Card = component$(({ person }: { person: Person }) => {
       </div>
       <div class="flex flex-col gap-y-1">
         {person.parentOne && person.parentTwo ? (
-          <div class="mt-2 text-center text-sm -mb-1">
+          <div class="mt-2 -mb-1 text-center text-sm">
             ({person.parentOne} + {person.parentTwo})
           </div>
         ) : (
@@ -38,7 +38,7 @@ export const Card = component$(({ person }: { person: Person }) => {
             <Chip color="indigo">{readableAge}</Chip>
           </span>
         </div>
-        <div class="text-center">{birthdayText}</div>
+        {birthdayLine}
         {person.children && (
           <div class="mt-3">
             {person.children.map(child => (
