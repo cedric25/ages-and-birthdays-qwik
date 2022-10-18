@@ -51,7 +51,6 @@ export default component$(() => {
     <QwikCity>
       <head>
         <meta charSet="utf-8" />
-        <link href="/dist/output.css" rel="stylesheet" />
         <RouterHead />
       </head>
       <body lang="en">
