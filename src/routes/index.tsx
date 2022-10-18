@@ -7,7 +7,7 @@ export default component$(() => {
   return (
     <>
       <Filters />
-      <div class="py-3 px-5 mb-24">
+      <div class="mb-24 py-3 px-5">
         <List />
       </div>
     </>
@@ -15,6 +15,5 @@ export default component$(() => {
 })
 
 export const head: DocumentHead = {
-  // title: 'Birthdays',
-  title: 'Qwik',
+  title: 'Birthdays',
 }
