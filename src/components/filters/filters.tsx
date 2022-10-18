@@ -1,7 +1,6 @@
 import {
   $,
   component$,
-  mutable,
   useClientEffect$,
   useContext,
   useStore,
@@ -160,7 +159,7 @@ export default component$(() => {
                 <Chip
                   color={'sky'}
                   count={group.count}
-                  selected={mutable(isGroupSelected(group.label, userState))}
+                  selected={isGroupSelected(group.label, userState)}
                   onClick$={() => {
                     toggleGroup(group.label)
                   }}
