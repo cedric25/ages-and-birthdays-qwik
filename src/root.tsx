@@ -11,8 +11,9 @@ import {
 } from '@builder.io/qwik-city'
 import { RouterHead } from '~/components/router-head/router-head'
 import { initFirebase } from '~/services/firebase/firebase'
-import { getUserData } from '~/services/db'
+import { getAndWatchUserData, getUserData } from '~/services/db'
 import { AppContext, UserState } from '~/appContext'
+import { Modal } from '~/components/modal/modal'
 
 import './global.css'
 
@@ -34,9 +35,8 @@ export default component$(() => {
       if (!userState.user) {
         return
       }
-      const { importantPersons, groups } = await getUserData(userState.user.id)
-      userState.importantPersons = importantPersons
-      userState.groups = groups
+
+      getAndWatchUserData({ userId: userState.user.id, userState })
     },
     { eagerness: 'load' }
   )
@@ -55,6 +55,7 @@ export default component$(() => {
       </head>
       <body lang="en">
         <RouterOutlet />
+        <Modal />
         <ServiceWorkerRegister />
       </body>
     </QwikCity>

@@ -31,10 +31,13 @@ export default component$(() => {
             class="dropdown-content menu rounded-box menu-compact mt-3 bg-base-100 p-2 shadow"
           >
             <li>
-              <a class="whitespace-nowrap text-lg">
-                <img src="/fa6-solid_plus.svg" />
+              <label
+                for="ab-modal"
+                class="modal-button whitespace-nowrap text-lg"
+              >
+                <img src="/fa6-solid_plus.svg" alt="icon-plus" />
                 Add new birthday <span class="mr-2">🎂</span>
-              </a>
+              </label>
             </li>
           </ul>
         </div>
@@ -48,7 +51,7 @@ export default component$(() => {
         {userState.user ? (
           <UserMenu />
         ) : (
-          <div class="tooltip tooltip-bottom mr-3" data-tip="Sign in">
+          <div class="tooltip tooltip-bottom mr-3 flex" data-tip="Sign in">
             <button
               type="button"
               onClick$={() => signUserWithGoogle(userState)}

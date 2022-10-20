@@ -2,72 +2,79 @@ import dayjs from 'dayjs'
 import { getDatabase, ref, child, get, set, update } from 'firebase/database'
 import type { User } from '~/@types/User'
 import type { DbPerson, Person } from '~/@types/Person'
-import type { Group } from '~/@types/Group'
-import { YEAR_FOR_NO_YEAR } from '~/constants/constants'
-import { getDaysUntilBirthday } from '~/helpers/daysUntilBirthday'
-import { computeAge } from '~/helpers/computeAge'
-import { isBaby } from '~/helpers/isBaby'
+import type { DbGroup, Group } from '~/@types/Group'
+import { PersonUpdateInput } from '~/@types/Person'
+import { UserState } from '~/appContext'
 
 // FOR TESTS
-import dbTestContent from './dbTestContent.json'
+// import dbTestContent from './dbTestContent.json'
+
+export async function getAndWatchUserData({
+  userId,
+  userState,
+}: {
+  userId: string
+  userState: UserState
+}) {
+  const userData = await getUserData(userId)
+  if (!userData) {
+    return
+  }
+  const { importantPersons, groups } = userData
+  console.log('db state:', importantPersons, groups)
+  userState.importantPersons = importantPersons || {}
+  userState.groups = groups || []
+  return userData
+}
 
 export async function getUserData(userId: string) {
-  // const userDataSnapshot = await readUserDataOnce(userId)
-  // return userDataSnapshot.val()
+  const userDataSnapshot = await readUserDataOnce(userId)
+  return userDataSnapshot.val()
 
   // FOR TESTS
-  return {
-    importantPersons: formatPersonsFromDb(dbTestContent.importantPersons),
-    groups: formatGroupsFromDb(
-      dbTestContent.groups,
-      dbTestContent.importantPersons
-    ),
+  // return {
+  //   importantPersons: formatPersonsFromDb(dbTestContent.importantPersons),
+  //   groups: formatGroupsFromDb(
+  //     dbTestContent.groups,
+  //     dbTestContent.importantPersons
+  //   ),
+  // }
+}
+
+export async function oneTimeUploadToDb({
+  user,
+  importantPersons,
+  groups,
+}: {
+  user: User
+  importantPersons: Record<string, DbPerson>
+  groups: string[]
+}) {
+  console.log('-> oneTimeUploadToDb')
+  try {
+    await setUserData(user.id, {
+      user: {
+        ...user,
+        createdAt: dayjs().toISOString(),
+        countSessions: 1,
+      },
+      importantPersons,
+      groups,
+    })
+  } catch (err) {
+    console.error('Firebase write failed...', err)
+    throw err
   }
 }
 
-function formatPersonsFromDb(dbPersons: Record<string, DbPerson>) {
-  const persons = Object.values(dbPersons).reduce((result, person) => {
-    result[person.id] = formatPerson(person, dbPersons)
-    return result
-  }, {} as Record<string, Person>)
-  return persons
-}
-
-function formatPerson(person: DbPerson, dbPersons: Record<string, DbPerson>) {
-  const age = computeAge(person.birthday)
-  return {
-    ...person,
-    // Until everything is string in db
-    birthday: getBirthdayFromIsoDate(person.birthday),
-    age,
-    daysUntilBirthday: getDaysUntilBirthday(person.birthday),
-    isBaby: isBaby(age),
-    children: lookForChildren(person.name, dbPersons),
-  }
-}
-
-function lookForChildren(
-  personName: string,
-  dbPersons: Record<string, DbPerson>
-): Person[] {
-  const children = []
-  for (const person of Object.values(dbPersons)) {
-    if (person.parentOne === personName || person.parentTwo === personName) {
-      children.push(formatPerson(person, dbPersons))
-    }
-  }
-  return children.sort((kidOne, kidTwo) => {
-    if (kidOne.birthday === kidTwo.birthday) {
-      return kidOne.name.localeCompare(kidTwo.name)
-    }
-    if (kidOne.birthday.length !== 10 || kidTwo.birthday.length !== 10) {
-      return kidOne.name.localeCompare(kidTwo.name)
-    }
-    return dayjs(kidOne.birthday).unix() < dayjs(kidTwo.birthday).unix()
-      ? -1
-      : 1
-  })
-}
+// FOR TESTS
+// function formatPersonsFromDb(dbPersons: Record<string, DbPerson>) {
+//   const persons = Object.values(dbPersons).reduce((result, person) => {
+//     result[person.id] = formatPerson(person, dbPersons)
+//     return result
+//   }, {} as Record<string, Person>)
+//   return persons
+// }
 
 function formatGroupsFromDb(
   groups: string[],
@@ -79,14 +86,6 @@ function formatGroupsFromDb(
       person => person.groups && person.groups.includes(groupLabel)
     ).length,
   }))
-}
-
-function getBirthdayFromIsoDate(birthday: string) {
-  const year = birthday.substring(0, 4)
-  if (year === String(YEAR_FOR_NO_YEAR)) {
-    return birthday.substring(5, 10)
-  }
-  return birthday.substring(0, 10)
 }
 
 export function readUserDataOnce(userId: string) {
@@ -121,9 +120,9 @@ export function setUserData(
     importantPersons,
     groups,
   }: {
-    user: User & { createdAt: string }
-    importantPersons: Person[]
-    groups: Group[]
+    user: User & { createdAt: string; countSessions: number }
+    importantPersons: Record<string, DbPerson>
+    groups: DbGroup[]
   }
 ) {
   const db = getDatabase()
@@ -145,22 +144,26 @@ export function getGroupsRef(userId: string) {
 }
 
 // To add / update / remove a Firebase important person
-// export function setNewImportantPerson(
-//   userId: string,
-//   personId: string,
-//   personToAddOrUpdate: Person | null
-// ) {
-//   const db = getDatabase()
-//   if (!personToAddOrUpdate) {
-//     return set(ref(db, `users/${userId}/importantPersons/${personId}`), null)
-//   }
-//   const newPersonForDb = {
-//     ...personToAddOrUpdate,
-//     birthday: personToAddOrUpdate.birthday.toISOString(),
-//     groups: personToAddOrUpdate.groups || null, // Firebase doesn't like undefined?...
-//   }
-//   return set(
-//     ref(db, `users/${userId}/importantPersons/${personId}`),
-//     newPersonForDb
-//   )
-// }
+export function setNewImportantPerson({
+  userId,
+  personId,
+  personToAddOrUpdate,
+}: {
+  userId: string
+  personId: string
+  personToAddOrUpdate: PersonUpdateInput | null
+}) {
+  const db = getDatabase()
+  if (!personToAddOrUpdate) {
+    return set(ref(db, `users/${userId}/importantPersons/${personId}`), null)
+  }
+  const newPersonForDb = {
+    ...personToAddOrUpdate,
+    birthday: personToAddOrUpdate.birthday,
+    groups: personToAddOrUpdate.groups || null, // Firebase doesn't like undefined?...
+  }
+  return set(
+    ref(db, `users/${userId}/importantPersons/${personId}`),
+    newPersonForDb
+  )
+}

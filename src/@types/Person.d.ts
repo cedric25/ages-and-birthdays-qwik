@@ -1,12 +1,13 @@
-import type { Group } from '@/@types/Group'
-import type { Parent } from '@/@types/Parent'
-import type { Age } from '~/@types/Age'
+import { DbGroup, Group } from '~/@types/Group'
+import { Parent } from '~/@types/Parent'
+import { Age } from '~/@types/Age'
+import { DateOfBirth } from '~/@types/DateOfBirth'
 
 export type DbPerson = {
   id: string
   name: string
   birthday: string
-  groups?: Group[]
+  groups?: DbGroup[]
   parentOne?: Parent
   parentTwo?: Parent
   children?: DbPerson[]
@@ -22,8 +23,8 @@ export type Person = DbPerson & {
 }
 
 export type PersonUpdateInput = {
-  name?: string
-  birthday?: Date
+  name: string
+  birthday: DateOfBirth
   groups?: Group[]
   parentOne?: Parent
   parentTwo?: Parent
