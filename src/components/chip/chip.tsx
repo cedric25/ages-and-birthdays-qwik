@@ -30,7 +30,7 @@ export const Chip = component$(
             {count}
           </div>
         )}
-        <span className="py-[0.1rem] px-3">
+        <span class="py-[0.1rem] px-3">
           <Slot />
         </span>
       </button>

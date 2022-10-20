@@ -41,7 +41,7 @@ export default component$(() => {
   return (
     <input
       placeholder="Search..."
-      className="w-full rounded-lg border py-1 px-2"
+      class="w-full rounded-lg border py-1 px-2"
       value={state.searchTerm}
       onInput$={e => onSearchTerm((e.target as HTMLInputElement).value)}
       onKeyUp$={onKeyUp}

@@ -58,7 +58,7 @@ export default component$(() => {
   return (
     <>
       {Object.keys(state.persons).length > 1 && (
-        <div className="text-right mb-3 text-sm">
+        <div class="mb-3 text-right text-sm">
           {Object.keys(state.persons).length} persons
         </div>
       )}

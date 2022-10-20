@@ -11,7 +11,7 @@ export const SimpleChip = component$(
       <div
         class={`inline-flex h-[28px] items-center rounded-full text-sm ${cssClasses[color]}`}
       >
-        <span className="py-[0.1rem] px-3">
+        <span class="py-[0.1rem] px-3">
           <Slot />
         </span>
       </div>
