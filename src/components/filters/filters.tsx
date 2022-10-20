@@ -141,6 +141,7 @@ export default component$(() => {
               : 'w-0 scale-0 overflow-hidden opacity-0'
           }`}
           style="transition-property: width, opacity, transform;"
+          tabIndex={state.hasActiveFilters ? 0 : -1}
           onClick$={resetFilters}
         >
           <div class="ml-2 inline-block px-2">Reset</div>
