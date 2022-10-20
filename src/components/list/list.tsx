@@ -28,7 +28,6 @@ export default component$(() => {
   })
 
   useWatch$(({ track }) => {
-    // rerun this function  when `value` property changes.
     track(userState, 'selectedGroups')
     track(userState, 'searchTerm')
     const importantPersons = Object.values(userState.importantPersons)
