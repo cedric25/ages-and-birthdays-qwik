@@ -11,7 +11,7 @@ import {
 } from '@builder.io/qwik-city'
 import { RouterHead } from '~/components/router-head/router-head'
 import { initFirebase } from '~/services/firebase/firebase'
-import { getAndWatchUserData, getUserData } from '~/services/db'
+import { watchForDbChanges } from '~/services/db'
 import { AppContext, UserState } from '~/appContext'
 import { Modal } from '~/components/modal/modal'
 
@@ -36,7 +36,7 @@ export default component$(() => {
         return
       }
 
-      getAndWatchUserData({ userId: userState.user.id, userState })
+      watchForDbChanges({ userId: userState.user.id, userState })
     },
     { eagerness: 'load' }
   )

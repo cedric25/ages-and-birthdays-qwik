@@ -1,5 +1,13 @@
 import dayjs from 'dayjs'
-import { getDatabase, ref, child, get, set, update } from 'firebase/database'
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  set,
+  update,
+  onValue,
+} from 'firebase/database'
 import type { User } from '~/@types/User'
 import type { DbPerson, Person } from '~/@types/Person'
 import type { DbGroup, Group } from '~/@types/Group'
@@ -9,22 +17,8 @@ import { UserState } from '~/appContext'
 // FOR TESTS
 // import dbTestContent from './dbTestContent.json'
 
-export async function getAndWatchUserData({
-  userId,
-  userState,
-}: {
-  userId: string
-  userState: UserState
-}) {
-  const userData = await getUserData(userId)
-  if (!userData) {
-    return
-  }
-  const { importantPersons, groups } = userData
-  console.log('db state:', importantPersons, groups)
-  userState.importantPersons = importantPersons || {}
-  userState.groups = groups || []
-  return userData
+export function fetchUser({ userId }: { userId: string }) {
+  return get(getUserRef(userId))
 }
 
 export async function getUserData(userId: string) {
@@ -39,6 +33,39 @@ export async function getUserData(userId: string) {
   //     dbTestContent.importantPersons
   //   ),
   // }
+}
+
+export function watchForDbChanges({
+  userId,
+  userState,
+}: {
+  userId: string
+  userState: UserState
+}) {
+  // const MIN_LOADING_TIME = 250
+
+  const importantPersonsRef = getImportantPersonsRef(userId)
+  onValue(importantPersonsRef, personsSnapshot => {
+    console.log('onValue!')
+    // appStore.setSyncingDb(true)
+
+    userState.importantPersons = personsSnapshot.val() || {}
+
+    // setTimeout(() => {
+    //   appStore.setSyncingDb(false)
+    // }, MIN_LOADING_TIME)
+  })
+
+  const groupsRef = getGroupsRef(userId)
+  onValue(groupsRef, groupsSnapshot => {
+    // appStore.setSyncingDb(true)
+
+    userState.groups = groupsSnapshot.val() || []
+
+    // setTimeout(() => {
+    //   appStore.setSyncingDb(false)
+    // }, MIN_LOADING_TIME)
+  })
 }
 
 export async function oneTimeUploadToDb({
@@ -131,6 +158,11 @@ export function setUserData(
     importantPersons,
     groups,
   })
+}
+
+export function getUserRef(userId: string) {
+  const db = getDatabase()
+  return ref(db, `users/${userId}/user`)
 }
 
 export function getImportantPersonsRef(userId: string) {

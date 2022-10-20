@@ -6,7 +6,7 @@ import {
   User as FirebaseUser,
 } from 'firebase/auth'
 import firebaseConfig from './firebase-config.js'
-import { getAndWatchUserData, oneTimeUploadToDb } from '~/services/db'
+import { watchForDbChanges, oneTimeUploadToDb, fetchUser } from '~/services/db'
 import { UserState } from '~/appContext'
 import { User } from '~/@types/User'
 
@@ -32,23 +32,24 @@ export async function signUserWithGoogle(userState: UserState) {
 
     userState.user = formatUser(result.user)
 
-    const userData = await getAndWatchUserData({
+    const dbUser = await fetchUser({
       userId: userState.user.id,
-      userState,
     })
 
     // Create user and initialize its db state
-    if (!userData) {
+    if (!dbUser) {
       // TODO Get what's in localStorage
       await oneTimeUploadToDb({
         user: userState.user,
         importantPersons: {},
         groups: [],
       })
-      userState.importantPersons = {}
-      userState.groups = []
-      return
     }
+
+    watchForDbChanges({
+      userId: userState.user.id,
+      userState,
+    })
   } catch (err) {
     console.log(err)
   }
