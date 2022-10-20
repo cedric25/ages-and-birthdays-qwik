@@ -17,7 +17,7 @@ export default component$(() => {
   })
 
   return (
-    <div class="dropdown dropdown-end">
+    <div class="dropdown dropdown-end h-[48px] w-[48px]">
       <label tabIndex={0} class="avatar btn btn-ghost btn-circle">
         <div class="w-10 rounded-full border border-white">
           {userState.user && userState.user.photoUrl ? (
