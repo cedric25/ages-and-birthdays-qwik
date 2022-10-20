@@ -9,8 +9,8 @@ export const Chip = component$(
   }: {
     color: 'emerald' | 'indigo' | 'sky'
     count?: number
-    selected?: boolean
-    onClick$?: PropFunction<() => void>
+    selected: boolean
+    onClick$: PropFunction<() => void>
   }) => {
     const cssClasses = {
       emerald: 'text-emerald-500 bg-emerald-500/10',
@@ -20,13 +20,13 @@ export const Chip = component$(
     return (
       <button
         type="button"
-        class={`inline-flex items-center h-[28px] text-sm rounded-full ${
+        class={`inline-flex h-[28px] items-center rounded-full text-sm ${
           cssClasses[color]
         } ${selected ? 'border border-2 border-primary px-0' : 'px-[2px]'}`}
-        {...(onClick$ && { onClick$ })}
+        onClick$={onClick$}
       >
         {count && (
-          <div class="inline-flex items-center justify-center rounded-full bg-gray-200 -mr-1 w-5 h-5 ml-1 text-xs font-bold">
+          <div class="-mr-1 ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-200 text-xs font-bold">
             {count}
           </div>
         )}
