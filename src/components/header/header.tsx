@@ -1,4 +1,4 @@
-import { component$, useContext } from '@builder.io/qwik'
+import { $, component$, useContext } from '@builder.io/qwik'
 import { Link } from '@builder.io/qwik-city'
 import { AppContext } from '~/appContext'
 import { signUserWithGoogle } from '~/services/firebase/firebase'
@@ -6,6 +6,10 @@ import UserMenu from '~/components/header/userMenu'
 
 export default component$(() => {
   const userState = useContext(AppContext)
+
+  const addBirthday = $(() => {
+    userState.clickedPersonId = null
+  })
 
   return (
     <div class="navbar bg-primary">
@@ -34,6 +38,7 @@ export default component$(() => {
               <label
                 for="ab-modal"
                 class="modal-button whitespace-nowrap text-lg"
+                onClick$={addBirthday}
               >
                 <img src="/fa6-solid_plus.svg" alt="icon-plus" />
                 Add new birthday <span class="mr-2">🎂</span>

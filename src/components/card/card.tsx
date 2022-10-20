@@ -1,20 +1,36 @@
-import { component$ } from '@builder.io/qwik'
+import { $, component$, useContext } from '@builder.io/qwik'
 import { getBirthdayText } from './getBirthdayText'
 import { computeAge } from '~/helpers/computeAge'
 import { Person } from '~/@types/Person'
 import { SimpleChip } from '~/components/chip/simpleChip'
-import { Chip } from '~/components/chip/chip'
 import { getReadableBirthday } from '~/helpers/readableBirthday'
 import { getReadableAge } from '~/helpers/readableAge'
+import { AppContext } from '~/appContext'
 
 export const Card = component$(({ person }: { person: Person }) => {
+  const userState = useContext(AppContext)
+
   const age = computeAge(person.birthday)
   const readableBirthday = getReadableBirthday(person.birthday)
   const readableAge = getReadableAge(person.birthday)
   const birthdayLine = getBirthdayText(person.birthday, age)
 
+  const editPerson = $(() => {
+    userState.clickedPersonId = person.id
+  })
+
   return (
-    <div class="rounded-lg bg-white p-2 shadow" data-id={person.id}>
+    // <button
+    //   type="button"
+    //   class="rounded-lg bg-white p-2 shadow"
+    //   data-id={person.id}
+    //   onClick$={editPerson}
+    // >
+    <label
+      for="ab-modal"
+      class="rounded-lg bg-white p-2 shadow"
+      onClick$={editPerson}
+    >
       <div>
         {person.groups?.map(group => (
           <SimpleChip color={'sky'}>{group}</SimpleChip>
@@ -52,6 +68,6 @@ export const Card = component$(({ person }: { person: Person }) => {
           </div>
         )}
       </div>
-    </div>
+    </label>
   )
 })

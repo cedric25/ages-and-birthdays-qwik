@@ -23,6 +23,7 @@ export type Person = DbPerson & {
 }
 
 export type PersonUpdateInput = {
+  id: string
   name: string
   birthday: DateOfBirth
   groups?: Group[]

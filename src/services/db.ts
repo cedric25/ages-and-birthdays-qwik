@@ -46,7 +46,6 @@ export function watchForDbChanges({
 
   const importantPersonsRef = getImportantPersonsRef(userId)
   onValue(importantPersonsRef, personsSnapshot => {
-    console.log('onValue!')
     // appStore.setSyncingDb(true)
 
     userState.importantPersons = personsSnapshot.val() || {}

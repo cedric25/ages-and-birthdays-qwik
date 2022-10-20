@@ -9,6 +9,7 @@ export interface UserState {
   groups: Group[]
   searchTerm: string
   selectedGroups: string[]
+  clickedPersonId?: string | null
 }
 
 export const AppContext = createContext<UserState>('app-context')
