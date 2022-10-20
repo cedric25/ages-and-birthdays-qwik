@@ -121,14 +121,19 @@ export default component$(() => {
     <>
       <div class="mx-4 mt-4 mb-2 flex justify-center text-center">
         <button
-          class={`relative h-10 flex-1 rounded-lg px-3 tracking-wide ${
-            state.isLoaded && state.showFilters ? 'bg-gray-200' : 'bg-sky-200'
+          class={`btn relative flex-1 ${
+            state.isLoaded && state.showFilters
+              ? 'btn-outline hover:bg-gray-100 hover:text-black'
+              : 'btn-accent text-white'
           }`}
           onClick$={toggleShowFilters}
         >
           {state.isLoaded && state.showFilters ? 'Close' : 'Filters'}
           {!state.showFilters && state.hasActiveFilters && (
-            <span class="absolute top-[10px] ml-[4px] h-2 w-2 rounded-full bg-green-500">
+            <span
+              class="absolute top-[10px] h-2 w-2 rounded-full bg-orange-400"
+              style="right: calc(50% - 38px);"
+            >
               &nbsp;
             </span>
           )}

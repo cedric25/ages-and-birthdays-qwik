@@ -11,12 +11,6 @@ module.exports = {
       colors: {
         primary: colors.sky['400'],
       },
-      height: {
-        'top-menu': 'var(--top-menu-height)',
-      },
-      padding: {
-        'top-menu': 'var(--top-menu-height)',
-      },
     },
   },
   plugins: [require('daisyui')],
@@ -25,7 +19,7 @@ module.exports = {
       {
         light: {
           ...require('daisyui/src/colors/themes')['[data-theme=light]'],
-          // primary: '#a991f7',
+          primary: colors.sky['400'],
           // secondary: '#f6d860',
           // accent: '#37cdbe',
           // neutral: '#3d4451',

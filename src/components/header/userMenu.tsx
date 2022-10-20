@@ -38,7 +38,7 @@ export default component$(() => {
         class="dropdown-content menu rounded-box menu-compact z-[1000] mt-2 w-52 bg-base-100 p-2 shadow"
       >
         <li>
-          <button type="button" class="hover:bg-sky-100" onClick$={signOut}>
+          <button type="button" onClick$={signOut}>
             <img src="/fa6-solid_arrow-right-from-bracket.svg" />
             Sign out
           </button>

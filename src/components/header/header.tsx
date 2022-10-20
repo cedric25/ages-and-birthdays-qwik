@@ -8,21 +8,56 @@ export default component$(() => {
   const userState = useContext(AppContext)
 
   return (
-    <header class="fixed z-10 flex flex h-top-menu w-full items-center bg-primary pl-5 pr-2">
+    <div class="navbar bg-primary">
+      <div class="flex-none">
+        <div class="dropdown">
+          <label tabIndex={0} class="btn btn-ghost btn-circle text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block h-5 w-5 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            class="dropdown-content menu rounded-box menu-compact mt-3 bg-base-100 p-2 shadow"
+          >
+            <li>
+              <a class="whitespace-nowrap text-lg">
+                <img src="/fa6-solid_plus.svg" />
+                Add new birthday <span class="mr-2">🎂</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class="flex-1">
-        <Link class="text-xl text-white" href="/">
+        <Link href="/" class="btn btn-ghost text-xl normal-case text-white">
           Ages & Birthdays
         </Link>
       </div>
-      {userState.user ? (
-        <UserMenu />
-      ) : (
-        <div class="tooltip tooltip-bottom mr-3" data-tip="Sign in">
-          <button type="button" onClick$={() => signUserWithGoogle(userState)}>
-            <img src="/icon-smile.svg" className="w-[25px]" />
-          </button>
-        </div>
-      )}
-    </header>
+      <div class="flex-none">
+        {userState.user ? (
+          <UserMenu />
+        ) : (
+          <div class="tooltip tooltip-bottom mr-3" data-tip="Sign in">
+            <button
+              type="button"
+              onClick$={() => signUserWithGoogle(userState)}
+            >
+              <img src="/icon-smile.svg" class="w-[25px]" />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   )
 })
