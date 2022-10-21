@@ -20,15 +20,10 @@ export const Card = component$(({ person }: { person: Person }) => {
   })
 
   return (
-    // <button
-    //   type="button"
-    //   class="rounded-lg bg-white p-2 shadow"
-    //   data-id={person.id}
-    //   onClick$={editPerson}
-    // >
     <label
       for="ab-modal"
-      class="rounded-lg bg-white p-2 shadow"
+      class="cursor-pointer rounded-lg bg-white p-2 shadow"
+      data-id={person.id}
       onClick$={editPerson}
     >
       <div>
