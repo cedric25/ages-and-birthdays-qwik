@@ -10,8 +10,12 @@ import { AppContext } from '~/appContext'
 
 export const Modal = component$(() => {
   const state = useStore<{
+    isEdit: boolean
+    personId: string
     name: string
   }>({
+    isEdit: false,
+    personId: '',
     name: '',
   })
 
@@ -20,27 +24,29 @@ export const Modal = component$(() => {
   })
 
   const closeModal = $(() => {
-    document.getElementById('ab-modal').click()
+    document.getElementById('ab-modal')?.click()
   })
 
   const userState = useContext(AppContext)
 
   useWatch$(({ track }) => {
     track(userState, 'clickedPersonId')
-    console.log('watch | userState.clickedPersonId', userState.clickedPersonId)
     if (!userState.clickedPersonId) {
+      state.isEdit = false
       resetState()
       return
     }
+    state.isEdit = true
     const person = userState.importantPersons[userState.clickedPersonId]
+    state.personId = person.id
     state.name = person.name
   })
 
-  const addPerson = $(async () => {
+  const addOrUpdatePerson = $(async () => {
     console.log('plop', state.name)
 
     if (userState.user) {
-      const personId = crypto.randomUUID()
+      const personId = state.personId || crypto.randomUUID()
       await setNewImportantPerson({
         userId: userState.user.id,
         personId,
@@ -77,11 +83,17 @@ export const Modal = component$(() => {
           </div>
 
           <div class="modal-action">
-            {/*<label for="ab-modal" class="btn btn-primary">*/}
-            {/*  Add*/}
-            {/*</label>*/}
-            <button type="button" class="btn btn-primary" onClick$={addPerson}>
-              Add
+            {state.isEdit && (
+              <label for="ab-modal" class="btn btn-ghost">
+                Cancel
+              </label>
+            )}
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick$={addOrUpdatePerson}
+            >
+              {state.isEdit ? 'Ok' : 'Add'}
             </button>
           </div>
         </label>
