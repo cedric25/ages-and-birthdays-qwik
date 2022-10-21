@@ -19,15 +19,17 @@ export const Modal = component$(() => {
     name: '',
   })
 
+  const userState = useContext(AppContext)
+
   const resetState = $(() => {
+    state.personId = ''
     state.name = ''
+    userState.clickedPersonId = null
   })
 
   const closeModal = $(() => {
     document.getElementById('ab-modal')?.click()
   })
-
-  const userState = useContext(AppContext)
 
   useWatch$(({ track }) => {
     track(userState, 'clickedPersonId')
@@ -43,8 +45,6 @@ export const Modal = component$(() => {
   })
 
   const addOrUpdatePerson = $(async () => {
-    console.log('plop', state.name)
-
     if (userState.user) {
       const personId = state.personId || crypto.randomUUID()
       await setNewImportantPerson({
@@ -63,39 +63,63 @@ export const Modal = component$(() => {
     closeModal()
   })
 
+  const removePerson = $(async () => {
+    if (userState.user) {
+      const personId = state.personId || crypto.randomUUID()
+      await setNewImportantPerson({
+        userId: userState.user.id,
+        personId,
+        personToAddOrUpdate: null,
+      })
+    }
+
+    resetState()
+
+    closeModal()
+  })
+
   return (
     <>
       <input type="checkbox" id="ab-modal" class="modal-toggle" />
       <label class="modal" for="ab-modal">
         <label class="modal-box">
-          <div>
-            <label for="name"></label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Name"
-              class="input input-bordered w-full max-w-xs"
-              value={state.name}
-              onInput$={e =>
-                (state.name = (e.target as HTMLInputElement).value)
-              }
-            />
-          </div>
+          <form preventdefault:submit onSubmit$={addOrUpdatePerson}>
+            <div>
+              <label for="name"></label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Name"
+                class="input input-bordered w-full max-w-xs"
+                value={state.name}
+                onInput$={e =>
+                  (state.name = (e.target as HTMLInputElement).value)
+                }
+              />
+            </div>
 
-          <div class="modal-action">
-            {state.isEdit && (
-              <label for="ab-modal" class="btn btn-ghost">
-                Cancel
-              </label>
-            )}
-            <button
-              type="button"
-              class="btn btn-primary"
-              onClick$={addOrUpdatePerson}
-            >
-              {state.isEdit ? 'Ok' : 'Add'}
-            </button>
-          </div>
+            <div class="modal-action justify-start">
+              {state.isEdit && (
+                <>
+                  <div class="flex-1">
+                    <button
+                      type="button"
+                      class="btn btn-error"
+                      onClick$={removePerson}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <label for="ab-modal" class="btn btn-ghost">
+                    Cancel
+                  </label>
+                </>
+              )}
+              <button type="submit" class="btn btn-primary">
+                {state.isEdit ? 'Ok' : 'Add'}
+              </button>
+            </div>
+          </form>
         </label>
       </label>
     </>
