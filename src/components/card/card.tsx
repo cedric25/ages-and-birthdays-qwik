@@ -16,6 +16,7 @@ export const Card = component$(({ person }: { person: Person }) => {
   const birthdayLine = getBirthdayText(person.birthday, age)
 
   const editPerson = $(() => {
+    userState.clickedPersonId = null
     userState.clickedPersonId = person.id
   })
 
