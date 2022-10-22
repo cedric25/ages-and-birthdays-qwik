@@ -14,25 +14,10 @@ import type { DbGroup, Group } from '~/@types/Group'
 import { PersonUpdateInput } from '~/@types/Person'
 import { UserState } from '~/appContext'
 
-// FOR TESTS
-// import dbTestContent from './dbTestContent.json'
-
-export function fetchUser({ userId }: { userId: string }) {
-  return get(getUserRef(userId))
-}
-
-export async function getUserData(userId: string) {
-  const userDataSnapshot = await readUserDataOnce(userId)
+export async function fetchUser({ userId }: { userId: string }) {
+  const dbRef = ref(getDatabase())
+  const userDataSnapshot = await get(child(dbRef, `users/${userId}`))
   return userDataSnapshot.val()
-
-  // FOR TESTS
-  // return {
-  //   importantPersons: formatPersonsFromDb(dbTestContent.importantPersons),
-  //   groups: formatGroupsFromDb(
-  //     dbTestContent.groups,
-  //     dbTestContent.importantPersons
-  //   ),
-  // }
 }
 
 export function watchForDbChanges({
@@ -42,6 +27,7 @@ export function watchForDbChanges({
   userId: string
   userState: UserState
 }) {
+  console.log('-> watchForDbChanges')
   // const MIN_LOADING_TIME = 250
 
   const importantPersonsRef = getImportantPersonsRef(userId)
@@ -76,7 +62,6 @@ export async function oneTimeUploadToDb({
   importantPersons: Record<string, DbPerson>
   groups: string[]
 }) {
-  console.log('-> oneTimeUploadToDb')
   try {
     await setUserData(user.id, {
       user: {
@@ -93,15 +78,6 @@ export async function oneTimeUploadToDb({
   }
 }
 
-// FOR TESTS
-// function formatPersonsFromDb(dbPersons: Record<string, DbPerson>) {
-//   const persons = Object.values(dbPersons).reduce((result, person) => {
-//     result[person.id] = formatPerson(person, dbPersons)
-//     return result
-//   }, {} as Record<string, Person>)
-//   return persons
-// }
-
 function formatGroupsFromDb(
   groups: string[],
   persons: Record<string, DbPerson>
@@ -114,24 +90,11 @@ function formatGroupsFromDb(
   }))
 }
 
-export function readUserDataOnce(userId: string) {
-  const dbRef = ref(getDatabase())
-  return get(child(dbRef, `users/${userId}`))
-}
-
 export function updateUserLastSeenAt(userId: string) {
   const db = getDatabase()
   return update(ref(db, `users/${userId}/user`), {
     '/lastSeenAt': new Date(),
   })
-}
-
-export function setImportantPersons(
-  userId: string,
-  importantPersons: Person[]
-) {
-  const db = getDatabase()
-  return set(ref(db, `users/${userId}/importantPersons`), importantPersons)
 }
 
 export function setGroups(userId: string, groups: Group[]) {
@@ -157,11 +120,6 @@ export function setUserData(
     importantPersons,
     groups,
   })
-}
-
-export function getUserRef(userId: string) {
-  const db = getDatabase()
-  return ref(db, `users/${userId}/user`)
 }
 
 export function getImportantPersonsRef(userId: string) {
