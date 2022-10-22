@@ -25,7 +25,7 @@ export const Chip = component$(
         } ${selected ? 'border border-2 border-primary px-0' : 'px-[2px]'}`}
         onClick$={onClick$}
       >
-        {count && (
+        {count != null && (
           <div class="-mr-1 ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-200 text-xs font-bold">
             {count}
           </div>

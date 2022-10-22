@@ -13,6 +13,8 @@ import type { DbPerson, Person } from '~/@types/Person'
 import type { DbGroup, Group } from '~/@types/Group'
 import { PersonUpdateInput } from '~/@types/Person'
 import { UserState } from '~/appContext'
+import { formatPerson } from '~/helpers/formatPerson'
+import { formatGroups } from '~/helpers/formatGroups'
 
 export async function fetchUser({ userId }: { userId: string }) {
   const dbRef = ref(getDatabase())
@@ -34,7 +36,20 @@ export function watchForDbChanges({
   onValue(importantPersonsRef, personsSnapshot => {
     // appStore.setSyncingDb(true)
 
-    userState.importantPersons = personsSnapshot.val() || {}
+    const dbPersons: Record<string, DbPerson> = personsSnapshot.val()
+
+    if (!dbPersons) {
+      userState.importantPersons = {}
+      return
+    }
+
+    userState.importantPersons = Object.values(dbPersons).reduce(
+      (result: Record<string, Person>, dbPerson: DbPerson) => {
+        result[dbPerson.id] = formatPerson(dbPerson, dbPersons)
+        return result
+      },
+      {}
+    )
 
     // setTimeout(() => {
     //   appStore.setSyncingDb(false)
@@ -45,7 +60,14 @@ export function watchForDbChanges({
   onValue(groupsRef, groupsSnapshot => {
     // appStore.setSyncingDb(true)
 
-    userState.groups = groupsSnapshot.val() || []
+    const dbGroups: string[] = groupsSnapshot.val()
+
+    if (!dbGroups) {
+      userState.groups = []
+      return
+    }
+
+    userState.groups = formatGroups({ dbGroups, dbPersons: {} })
 
     // setTimeout(() => {
     //   appStore.setSyncingDb(false)
@@ -76,18 +98,6 @@ export async function oneTimeUploadToDb({
     console.error('Firebase write failed...', err)
     throw err
   }
-}
-
-function formatGroupsFromDb(
-  groups: string[],
-  persons: Record<string, DbPerson>
-) {
-  return groups.map(groupLabel => ({
-    label: groupLabel,
-    count: Object.values(persons).filter(
-      person => person.groups && person.groups.includes(groupLabel)
-    ).length,
-  }))
 }
 
 export function updateUserLastSeenAt(userId: string) {

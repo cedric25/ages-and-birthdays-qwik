@@ -29,7 +29,7 @@ function getBirthdayFromIsoDate(birthday: string) {
   return birthday.substring(0, 10)
 }
 
-function lookForChildren(
+export function lookForChildren(
   personName: string,
   dbPersons: Record<string, DbPerson>
 ): Person[] {
