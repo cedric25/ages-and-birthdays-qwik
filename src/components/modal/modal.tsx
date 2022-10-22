@@ -1,9 +1,9 @@
 import {
   $,
   component$,
+  useClientEffect$,
   useContext,
   useStore,
-  useWatch$,
 } from '@builder.io/qwik'
 import { setNewImportantPerson } from '~/services/db'
 import { AppContext } from '~/appContext'
@@ -31,7 +31,7 @@ export const Modal = component$(() => {
     document.getElementById('ab-modal')?.click()
   })
 
-  useWatch$(({ track }) => {
+  useClientEffect$(({ track }) => {
     track(userState, 'clickedPersonId')
     if (!userState.clickedPersonId) {
       state.isEdit = false
@@ -57,24 +57,19 @@ export const Modal = component$(() => {
         },
       })
     }
-
     resetState()
-
     closeModal()
   })
 
   const removePerson = $(async () => {
     if (userState.user) {
-      const personId = state.personId || crypto.randomUUID()
       await setNewImportantPerson({
         userId: userState.user.id,
-        personId,
+        personId: state.personId,
         personToAddOrUpdate: null,
       })
     }
-
     resetState()
-
     closeModal()
   })
 
@@ -98,8 +93,10 @@ export const Modal = component$(() => {
               />
             </div>
 
+            <div>Groups...</div>
+
             <div class="modal-action justify-start">
-              {state.isEdit && (
+              {state.isEdit ? (
                 <>
                   <div class="flex-1">
                     <button
@@ -114,6 +111,8 @@ export const Modal = component$(() => {
                     Cancel
                   </label>
                 </>
+              ) : (
+                <div class="flex-1">&nbsp;</div>
               )}
               <button type="submit" class="btn btn-primary">
                 {state.isEdit ? 'Ok' : 'Add'}
