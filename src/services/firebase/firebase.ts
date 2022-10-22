@@ -38,11 +38,11 @@ export async function signUserWithGoogle(userState: UserState) {
 
     // Create user and initialize its db state
     if (!dbUser) {
-      // TODO Get what's in localStorage
+      // TODO Get what might be in localStorage
       await oneTimeUploadToDb({
         user: userState.user,
         importantPersons: {},
-        groups: [],
+        groups: ['Family', 'Friends'],
       })
     }
 
