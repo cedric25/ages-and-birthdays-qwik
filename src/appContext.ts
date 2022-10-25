@@ -5,6 +5,8 @@ import { Group } from '~/@types/Group'
 
 export interface UserState {
   user: User | null
+  isSyncingPersons: boolean
+  isSyncingGroups: boolean
   importantPersons: Record<string, Person>
   groups: Group[]
   searchTerm: string

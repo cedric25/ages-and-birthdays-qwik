@@ -29,11 +29,11 @@ export function watchForDbChanges({
   userId: string
   userState: UserState
 }) {
-  // const MIN_LOADING_TIME = 250
+  const MIN_LOADING_TIME = 250
 
   const importantPersonsRef = getImportantPersonsRef(userId)
   onValue(importantPersonsRef, personsSnapshot => {
-    // appStore.setSyncingDb(true)
+    userState.isSyncingPersons = true
 
     const dbPersons: Record<string, DbPerson> = personsSnapshot.val()
 
@@ -50,14 +50,14 @@ export function watchForDbChanges({
       {}
     )
 
-    // setTimeout(() => {
-    //   appStore.setSyncingDb(false)
-    // }, MIN_LOADING_TIME)
+    setTimeout(() => {
+      userState.isSyncingPersons = false
+    }, MIN_LOADING_TIME)
   })
 
   const groupsRef = getGroupsRef(userId)
   onValue(groupsRef, groupsSnapshot => {
-    // appStore.setSyncingDb(true)
+    userState.isSyncingGroups = true
 
     const dbGroups: string[] = groupsSnapshot.val()
 
@@ -68,9 +68,9 @@ export function watchForDbChanges({
 
     userState.groups = formatGroups({ dbGroups, dbPersons: {} })
 
-    // setTimeout(() => {
-    //   appStore.setSyncingDb(false)
-    // }, MIN_LOADING_TIME)
+    setTimeout(() => {
+      userState.isSyncingGroups = false
+    }, MIN_LOADING_TIME)
   })
 }
 

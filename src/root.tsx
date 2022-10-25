@@ -20,6 +20,8 @@ import './global.css'
 export default component$(() => {
   const userState = useStore<UserState>({
     user: null,
+    isSyncingPersons: false,
+    isSyncingGroups: false,
     importantPersons: {},
     groups: [],
     searchTerm: '',
