@@ -29,7 +29,9 @@ export const Card = component$(({ person }: { person: Person }) => {
     >
       <div>
         {person.groups?.map(group => (
-          <SimpleChip color={'sky'}>{group}</SimpleChip>
+          <span class="mr-1">
+            <SimpleChip color={'sky'}>{group}</SimpleChip>
+          </span>
         ))}
       </div>
       <div class="flex flex-col gap-y-1">
