@@ -6,6 +6,7 @@ import {
   useClientEffect$,
   useContext,
   useStore,
+  useWatch$,
 } from '@builder.io/qwik'
 import dayjs from 'dayjs'
 import MobileSelect from 'mobile-select'
@@ -27,6 +28,7 @@ export const Modal = component$(() => {
     day?: string
     month?: { label: string; key: string }
     year?: string
+    dateOfBirthStr: string
   }>({
     isEdit: false,
     personId: '',
@@ -36,6 +38,20 @@ export const Modal = component$(() => {
     day: '',
     month: { label: '', key: '' },
     year: '',
+    dateOfBirthStr: '',
+  })
+
+  useWatch$(({ track }) => {
+    track(state, 'day')
+    track(state, 'month')
+    track(state, 'year')
+    if (!state.day && !state.month?.label && !state.year) {
+      state.dateOfBirthStr = ''
+      return
+    }
+    state.dateOfBirthStr = `${Number(state.day) || '-'} ${
+      state.month?.label || '-'
+    } ${state.year || '-'}`
   })
 
   const userState = useContext(AppContext)
@@ -92,7 +108,6 @@ export const Modal = component$(() => {
       cancelBtnText: 'Cancel',
       triggerDisplayValue: false,
       onChange: (data, indexArr) => {
-        console.log(data, indexArr)
         state.day = data[0] as string
         state.month = {
           label: data[1] as string,
@@ -221,20 +236,13 @@ export const Modal = component$(() => {
               ))}
             </div>
 
-            <div
+            <input
               id="date-of-birth"
+              value={state.dateOfBirthStr}
+              placeholder="Date of Birth"
+              readOnly
               class="input input-bordered mt-2 flex w-full max-w-xs cursor-pointer items-center"
-            >
-              {state.day || state.month?.label || state.year ? (
-                <>
-                  <span>{state.day || '-'}</span>
-                  <span class="ml-2">{state.month?.label || '-'}</span>
-                  <span class="ml-2">{state.year || '-'}</span>
-                </>
-              ) : (
-                <span class="text-gray-400">Date of Birth</span>
-              )}
-            </div>
+            />
 
             <div class="modal-action justify-start">
               {state.isEdit ? (
