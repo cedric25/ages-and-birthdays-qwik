@@ -29,7 +29,6 @@ export function watchForDbChanges({
   userId: string
   userState: UserState
 }) {
-  console.log('-> watchForDbChanges')
   // const MIN_LOADING_TIME = 250
 
   const importantPersonsRef = getImportantPersonsRef(userId)

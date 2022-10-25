@@ -4,12 +4,12 @@ export const Chip = component$(
   ({
     color,
     count,
-    selected,
+    selected = false,
     onClick$,
   }: {
     color: 'emerald' | 'indigo' | 'sky'
     count?: number
-    selected: boolean
+    selected?: boolean
     onClick$: PropFunction<() => void>
   }) => {
     const cssClasses = {
