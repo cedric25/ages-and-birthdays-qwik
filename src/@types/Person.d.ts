@@ -26,7 +26,7 @@ export type PersonUpdateInput = {
   id: string
   name: string
   birthday: DateOfBirth
-  groups?: Group[]
+  groups?: string[]
   parentOne?: Parent
   parentTwo?: Parent
   children?: Child[]

@@ -15,7 +15,7 @@ export function getBirthdayText(birthday: DateOfBirth, age: Age | null) {
   }
   if (nextAge) {
     return (
-      <div class="text-center">
+      <div class="mt-0.5 text-center">
         Will turn {nextAge} in{' '}
         <span class="font-bold">{daysUntilBirthday}</span>{' '}
         {(daysUntilBirthday > 1 && 'days') || 'day'}

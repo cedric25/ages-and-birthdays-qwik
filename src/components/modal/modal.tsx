@@ -24,9 +24,9 @@ export const Modal = component$(() => {
     name: string
     selectedGroups: string[]
     dateOfBirthSelect: NoSerialize<() => MobileSelect | null>
-    day: string | null
-    month: { label: string; key: string } | null
-    year: string | null
+    day?: string
+    month?: { label: string; key: string }
+    year?: string
   }>({
     isEdit: false,
     personId: '',
@@ -74,7 +74,6 @@ export const Modal = component$(() => {
   ]
 
   useClientEffect$(() => {
-    console.log('useClientEffect$')
     const days = ['', ...[...Array(30).keys()].map(key => String(key + 1))]
     const lastTwoDigitsYear = Number(String(dayjs().year()).substring(2, 4))
     const years = [
@@ -126,11 +125,14 @@ export const Modal = component$(() => {
           key: month,
           label: months[Number(month)],
         }
-      : null
+      : undefined
     state.year = year
     state.dateOfBirthSelect?.()?.locatePosition(0, Number(day))
     state.dateOfBirthSelect?.()?.locatePosition(1, Number(month))
     state.dateOfBirthSelect?.()?.locatePosition(2, Number(year) - 1899)
+
+    // --- Selected groups
+    state.selectedGroups = person.groups || []
   })
 
   const isGroupSelected = (groupLabel: string) => {
@@ -163,6 +165,7 @@ export const Modal = component$(() => {
           id: personId,
           name: state.name,
           birthday,
+          groups: state.selectedGroups,
         },
       })
     }
@@ -222,10 +225,10 @@ export const Modal = component$(() => {
               id="date-of-birth"
               class="input input-bordered mt-2 flex w-full max-w-xs cursor-pointer items-center"
             >
-              {state.day || state.month.label || state.year ? (
+              {state.day || state.month?.label || state.year ? (
                 <>
                   <span>{state.day || '-'}</span>
-                  <span class="ml-2">{state.month.label || '-'}</span>
+                  <span class="ml-2">{state.month?.label || '-'}</span>
                   <span class="ml-2">{state.year || '-'}</span>
                 </>
               ) : (

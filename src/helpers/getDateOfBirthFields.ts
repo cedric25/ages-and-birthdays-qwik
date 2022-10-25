@@ -11,7 +11,6 @@ export function getDateOfBirthFields(dateOfBirth: string) {
   }
   if (dateOfBirth.length === 5) {
     return {
-      year: null,
       month: fields[0],
       day: fields[1],
     }
@@ -20,24 +19,19 @@ export function getDateOfBirthFields(dateOfBirth: string) {
     return {
       year: fields[0],
       month: fields[1],
-      day: null,
     }
   }
-  return {
-    year: null,
-    month: null,
-    day: null,
-  }
+  return {}
 }
 
 export function formatDateOfBirth({
   day = '',
   monthKey = '',
-  year,
+  year = '',
 }: {
-  day: string
-  monthKey: string
-  year: string | null
+  day?: string
+  monthKey?: string
+  year?: string
 }): DateOfBirth {
   return `${year}-${monthKey.padStart(2, '0')}-${day.padStart(2, '0')}`
     .replaceAll('00', '')
